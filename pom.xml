@@ -14,8 +14,24 @@
 
 	<dependencies>  
 		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-controls</artifactId>
+			<version>13</version>
+		</dependency>
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-fxml</artifactId>
+			<version>13</version>
+		</dependency>
+		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.5.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-params</artifactId>
 			<version>5.5.2</version>
 			<scope>test</scope>
 		</dependency>
@@ -31,6 +47,15 @@
                     <release>11</release>
                 </configuration>
             </plugin>
+			<plugin>
+				<groupId>org.openjfx</groupId>
+				<artifactId>javafx-maven-plugin</artifactId>
+				<version>0.0.3</version>
+				<configuration>
+					<launcher>launcher</launcher>
+					<mainClass>at.fhhagenberg.sqelevator.ElevatorUIApp</mainClass>
+				</configuration>
+			</plugin>
         </plugins>
     </build>
 	
