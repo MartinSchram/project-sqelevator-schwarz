@@ -21,7 +21,7 @@ public class ElevatorUIApp extends Application {
 		// TODO Auto-generated method stub
 		try {
 			FXMLLoader myLoader = new FXMLLoader(getClass().getResource("view/ElevatorUI.fxml"));
-			 
+
 			Pane myPane = myLoader.load();
 	        stage.setTitle("ControllerUI");
 	        stage.setScene(new Scene(myPane, 400, 300));
