@@ -24,7 +24,8 @@ public class ElevatorUIApp extends Application {
 
 			Pane myPane = myLoader.load();
 	        stage.setTitle("ControllerUI");
-	        stage.setScene(new Scene(myPane, 400, 300));
+
+	        stage.setScene(new Scene(myPane, myPane.getWidth(), myPane.getHeight()));
 	        stage.minHeightProperty().setValue(300);
 	        stage.minWidthProperty().setValue(250);
 	        stage.show();
