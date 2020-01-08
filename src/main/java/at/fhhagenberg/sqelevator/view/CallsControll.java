@@ -19,5 +19,4 @@ public class CallsControll extends HBox {
         }
     }
 
-
 }
