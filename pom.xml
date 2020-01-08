@@ -12,11 +12,11 @@
         <maven.compiler.target>11</maven.compiler.target>
     </properties>
     <properties>
-	<sonar.projectKey>MartinSchram_project-sqelevator-schwarz</sonar.projectKey>
-  	<sonar.organization>martinschram</sonar.organization>
+ 	 <sonar.projectKey>MartinSchram_project-sqelevator-schwarz</sonar.projectKey>
+ 	 <sonar.organization>martinschram</sonar.organization>
   	<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-  	<sonar.login>1dc2f95a3536351cb19041f5151e5fa92391a4a4</sonar.login>
-     </properties>
+	<sonar.login>4a59ae11e9c74df7c07b11da3615a4a66578948e</sonar.login>
+    </properties>
 
 	<dependencies>  
 		<dependency>
