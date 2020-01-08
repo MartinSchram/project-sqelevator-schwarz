@@ -20,11 +20,10 @@
                   <FlowPane layoutX="121.0" layoutY="66.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                      <children>
                         <OneElevatorUIController fx:id="elev1" ></OneElevatorUIController>
-                         <OneElevatorUIController fx:id="elev2"></OneElevatorUIController>
+                        <OneElevatorUIController fx:id="elev2"></OneElevatorUIController>
                          <CallsControll fx:id="callsView"></CallsControll>
                          <StatusControll fx:id="statusControll"></StatusControll>
                      </children>
-
                   </FlowPane>
                </children>
             </AnchorPane>
