@@ -1,24 +1,23 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>at.fhhagenberg.sqelevator</groupId>
-    <artifactId>sqelevator</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+	<groupId>at.fhhagenberg.sqelevator</groupId>
+	<artifactId>sqelevator</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-    </properties>
-    <properties>
- 	 <sonar.projectKey>MartinSchram_project-sqelevator-schwarz</sonar.projectKey>
- 	 <sonar.organization>martinschram</sonar.organization>
-  	<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-	<sonar.login>4a59ae11e9c74df7c07b11da3615a4a66578948e</sonar.login>
-    </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
+		<sonar.projectKey>MartinSchram_project-sqelevator-schwarz</sonar.projectKey>
+		<sonar.organization>martinschram</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<sonar.login>4a59ae11e9c74df7c07b11da3615a4a66578948e</sonar.login>
+	</properties>
 
-	<dependencies>  
+	<dependencies>
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-controls</artifactId>
@@ -43,15 +42,15 @@
 		</dependency>
 	</dependencies>
 
-    <build>
+	<build>
 
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
 
-            </plugin>
+			</plugin>
 			<plugin>
 				<groupId>org.openjfx</groupId>
 				<artifactId>javafx-maven-plugin</artifactId>
@@ -61,7 +60,7 @@
 					<mainClass>at.fhhagenberg.sqelevator.ElevatorUIApp</mainClass>
 				</configuration>
 			</plugin>
-        </plugins>
-    </build>
-	
+		</plugins>
+	</build>
+
 </project>
