@@ -14,7 +14,7 @@
 		<sonar.projectKey>MartinSchram_project-sqelevator-schwarz</sonar.projectKey>
 		<sonar.organization>martinschram</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
-		<sonar.login>4a59ae11e9c74df7c07b11da3615a4a66578948e</sonar.login>
+		<sonar.login>9a28742d68c07f2f3f853743a8d47ecd1b831db5</sonar.login>
 	</properties>
 
 	<dependencies>
@@ -59,6 +59,26 @@
 					<launcher>launcher</launcher>
 					<mainClass>at.fhhagenberg.sqelevator.ElevatorUIApp</mainClass>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.4</version>
+				<executions>
+					<execution>
+						<id>jacoco-prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>jacoco-report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
