@@ -2,11 +2,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>at.fhhagenberg.sqelevator</groupId>
 	<artifactId>sqelevator</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.compiler.source>11</maven.compiler.source>
@@ -15,9 +13,7 @@
 		<sonar.organization>martinschram</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.login>9a28742d68c07f2f3f853743a8d47ecd1b831db5</sonar.login>
-        <sonar.coverage.jacoco.xmlReportPaths>../target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.openjfx</groupId>
@@ -41,10 +37,14 @@
 			<version>5.5.2</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.5.2</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
-
 	<build>
-
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -87,5 +87,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
