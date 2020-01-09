@@ -1,4 +1,4 @@
-/*package at.fhhagenberg.sqelevator;
+package at.fhhagenberg.sqelevator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +15,7 @@ import org.testfx.framework.junit5.Start;
 
 import javafx.stage.Stage;
 @ExtendWith(ApplicationExtension.class)
-public class ElevatorUIApp {
+public class ElevatorUIAppTest {
 	@Start
 	public void start(Stage stage) throws Exception {
 		new ElevatorUIApp().start(stage);
@@ -23,11 +23,11 @@ public class ElevatorUIApp {
 
 	@Test
 	public void testCall(FxRobot robot) {
-		robot.doubleClickOn("tbtnOpModeAuto");
+		/*robot.doubleClickOn("tbtnOpModeAuto");
 		robot.doubleClickOn("#b").write("2");
 
 		robot.clickOn("#compute");
 
-		verifyThat(".label.sum", hasText("3.00"));
+		verifyThat(".label.sum", hasText("3.00"));*/
 	}
-}*/
+}
