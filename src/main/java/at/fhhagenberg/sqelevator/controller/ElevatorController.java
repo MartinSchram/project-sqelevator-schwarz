@@ -1,4 +1,6 @@
-package at.fhhagenberg.sqelevator;
+package at.fhhagenberg.sqelevator.controller;
+
+import at.fhhagenberg.sqelevator.model.ElevatorData;
 
 public class ElevatorController {
 

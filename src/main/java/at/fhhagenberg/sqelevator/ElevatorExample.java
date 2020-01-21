@@ -1,5 +1,7 @@
 package at.fhhagenberg.sqelevator;
 
+import at.fhhagenberg.sqelevator.model.IElevator;
+
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;

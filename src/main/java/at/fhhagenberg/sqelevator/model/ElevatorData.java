@@ -1,4 +1,4 @@
-package at.fhhagenberg.sqelevator;
+package at.fhhagenberg.sqelevator.model;
 
 public class ElevatorData {
 
