@@ -169,7 +169,7 @@ public class ElevatorController extends Observable {
 			ElevatorScheduler.Schedule(elevators, GuiActions, building);
 			for (Elevator e : elevators)
 				e.UpdateTarget();
-			Thread.sleep(building.GetClockTick() * 3);
+			Thread.sleep(building.GetClockTick());
 			for (Elevator e : elevators)
 				e.UpdateData();
 			setChanged();
@@ -179,7 +179,7 @@ public class ElevatorController extends Observable {
 	}
 
 	private boolean GetPropertiesFromBackend() {
-		if (this.floors != 0 || this.elevatorCount != 0) {
+		if (this.floors == 0 || this.elevatorCount == 0) {
 			try {
 				SetElevatorCount(BackEnd.getElevatorNum());
 				SetFloorCount(BackEnd.getFloorNum());
