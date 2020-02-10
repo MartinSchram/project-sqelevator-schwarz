@@ -43,8 +43,8 @@ public class CallsControll extends AnchorPane {
         m_CountStages=CountStages;
         CreateStages(CountStages);
 
-        SetStageDownActive(2);
-        SetStageUpActive(9);
+//        SetStageDownActive(2);
+//        SetStageUpActive(9);
 
     }
 
@@ -55,8 +55,8 @@ public class CallsControll extends AnchorPane {
     private void CreateStages(int NumberStages) throws InvalidParameterException {
 
         if(NumberStages>0){
-            for(int i=0;i<=NumberStages;i++){
-                vBoxStages.getChildren().add(new CallsStageItem(i));
+            for(int i=0;i< NumberStages;i++){
+                vBoxStages.getChildren().add(new CallsStageItem(i+1));
             }
         }
         else{
@@ -67,14 +67,28 @@ public class CallsControll extends AnchorPane {
     }
 
 
-    private void SetStageDownActive(int StageNum){
-        CallsStageItem stage= (CallsStageItem) vBoxStages.getChildren().get(StageNum);
-        stage.SetArrowActive(CallsStageItem.ArrowTypes.eDOWN);
+    public void SetStageDown(int StageNum,boolean Active){
+
+        CallsStageItem stage= (CallsStageItem) vBoxStages.getChildren().get(StageNum-1);
+
+        if(Active){
+            stage.SetArrowActive(CallsStageItem.ArrowTypes.eDOWN);
+        }
+        else{
+            stage.SetArrowInactive(CallsStageItem.ArrowTypes.eDOWN);
+        }
+
     }
 
 
-    private void SetStageUpActive(int StageNum){
-        CallsStageItem stage= (CallsStageItem) vBoxStages.getChildren().get(StageNum);
-        stage.SetArrowActive(CallsStageItem.ArrowTypes.eUP);
+    public void SetStageUp(int StageNum,boolean Active){
+        CallsStageItem stage= (CallsStageItem) vBoxStages.getChildren().get(StageNum-1);
+
+        if(Active){
+            stage.SetArrowActive(CallsStageItem.ArrowTypes.eUP);
+        }
+        else{
+            stage.SetArrowInactive(CallsStageItem.ArrowTypes.eUP);
+        }
     }
 }

@@ -67,7 +67,7 @@ public class StatusControll extends AnchorPane {
         mListView.setMouseTransparent( true );
         mListView.setFocusTraversable( false );
 
-        AddStatus(StatusIdentifyer.eError, "ajsldöfjasöldfjölsadjfölsadjfölsadjfölsadjföladsjfölsadjfölsajf");
+//        AddStatus(StatusIdentifyer.eError, "ajsldöfjasöldfjölsadjfölsadjfölsadjfölsadjföladsjfölsadjfölsajf");
     }
 
     public enum StatusIdentifyer{
