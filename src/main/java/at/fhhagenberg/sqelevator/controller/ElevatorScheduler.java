@@ -25,8 +25,8 @@ public class ElevatorScheduler {
 		for (int i = 0; i < elevators.length; i++) 
 			if (!guiactions[i].AutoMode)
 				elevators[i].SetActions(guiactions[i]);
-		if(building.StateChanged())
-			ScheduleTargets(elevators,guiactions,building);		
+//		if(building.StateChanged())
+////			ScheduleTargets(elevators,guiactions,building);		
 	}
 
 	/**

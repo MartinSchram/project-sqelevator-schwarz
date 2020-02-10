@@ -28,8 +28,8 @@ public class Building {
 		this.floors = pfloors;
 		this.hStateButtonDown = new BuildingData(floors);
 		this.hStateButtonUp = new BuildingData(floors);
-		ResetHStates();
-		ResetIStates();
+//		ResetHStates();
+//		ResetIStates();
 	}
 	
 	

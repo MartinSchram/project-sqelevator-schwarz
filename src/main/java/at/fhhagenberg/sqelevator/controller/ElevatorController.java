@@ -1,6 +1,8 @@
 package at.fhhagenberg.sqelevator.controller;
 
+import java.net.MalformedURLException;
 import java.rmi.Naming;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Observable;
 
@@ -21,6 +23,12 @@ public class ElevatorController extends Observable {
 	private ElevatorScheduler scheduler;
 
 	private SystemData observerdata;
+	
+	
+	/**
+	 * Backend interfce binded to gui
+	 */
+	public IElevator BackEnd;
 
 	/**
 	 * Binding interface to the gui
@@ -37,6 +45,29 @@ public class ElevatorController extends Observable {
 		this.elevatorCount = pelevs;
 		this.floors = pfl;
 	}
+	
+	/**
+	 * ctor of controller
+	 * 
+	 * @param pelevs number of elevators in building
+	 * @param pfl    number of floors in building
+	 * @param inst   instance  of backend
+	 */
+	public ElevatorController(int pelevs, int pfl,IElevator inst) {
+		this.elevatorCount = pelevs;
+		this.floors = pfl;
+		this.BackEnd = inst;
+	}
+	
+	public boolean ConnectRMI() {
+		try {
+			this.BackEnd =(IElevator) Naming.lookup("rmi://localhost/ElevatorSim");
+			return true;
+		} catch (MalformedURLException | RemoteException | NotBoundException e) {
+			return false;
+
+		}
+	}
 
 	/**
 	 * Switches the elevator in on mode and calls init() for all elevators
@@ -44,7 +75,7 @@ public class ElevatorController extends Observable {
 	 * @return TRUE -> successfully switched on
 	 */
 	public boolean SwitchOn() {
-		this.on = init(null);
+		this.on = init();
 		return this.on;
 	}
 
@@ -82,20 +113,18 @@ public class ElevatorController extends Observable {
 	 * 
 	 * @return TRUE -> successfully initialized
 	 */
-	public boolean init(IElevator ele) {
-		if (!this.on) {
+	public boolean init() {
+		if (!this.on && this.BackEnd != null) {
 			this.GuiActions = new ElevatorActions[elevatorCount];
 			this.elevators = new Elevator[elevatorCount];
 			this.observerdata = new SystemData(elevatorCount);
 
 			try {
-				IElevator inst;
-				if(ele == null) inst = (IElevator) Naming.lookup("rmi://localhost/ElevatorSim");
-				else inst = ele;
+				
 				for (int i = 0; i < elevators.length; i++) {
-					elevators[i] = new Elevator(i, floors, inst);
+					elevators[i] = new Elevator(i, floors, this.BackEnd);
 				}
-				this.building = new Building(floors, inst);
+				this.building = new Building(floors, this.BackEnd);
 				this.on = true;
 
 			} catch (Exception e) {

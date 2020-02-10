@@ -3,6 +3,7 @@ package at.fhhagenberg.sqelevator;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import at.fhhagenberg.sqelevator.controller.ElevatorController;
 import at.fhhagenberg.sqelevator.view.ElevatorUI;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,8 @@ public class ElevatorUIApp extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
+		int ELEVATORSCOUNT =3;
+	    int FLOORS = 5;
 		// TODO Auto-generated method stub
 		try {
 			FXMLLoader myLoader = new FXMLLoader(getClass().getResource("view/ElevatorUI.fxml"));
@@ -26,7 +29,7 @@ public class ElevatorUIApp extends Application {
 			Pane myPane = myLoader.load();
 
 			ElevatorUI controller= myLoader.<ElevatorUI>getController();
-			controller.SetupUi(2,10);
+			controller.SetupUi(ELEVATORSCOUNT,FLOORS);
 
 
 			controller.SetPayload(0,100);
@@ -36,6 +39,15 @@ public class ElevatorUIApp extends Application {
 	        stage.minHeightProperty().setValue(300);
 	        stage.minWidthProperty().setValue(250);
 	        stage.show();
+			ElevatorController ev = new ElevatorController(ELEVATORSCOUNT,FLOORS);
+			// init bindings -> for(i<ELEVATORSCOUNT) ElevatorController.GuiActions[i] = gui binding
+			ev.init(null);
+			// ev.addObserver(GUI);
+			
+			new Thread(() -> {
+		      ev.RunCyclic();
+		    }).start();
+			// new thread start: ev.RunCyclic();
 		}
 		 catch (Exception ex) {
 	            Alert alert = new Alert(Alert.AlertType.ERROR);

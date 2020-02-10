@@ -9,6 +9,9 @@ public class BuildingData {
 
 	public BuildingData(int floor) {
 		this.Status = new boolean[floor];
+		for(int i =0; i<floor;i++) {
+			this.Status[i]=false;
+		}
 	}
 
 	/**
