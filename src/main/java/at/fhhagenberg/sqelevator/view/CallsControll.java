@@ -14,14 +14,19 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
 public class CallsControll extends AnchorPane {
 
     @FXML
     private VBox vBoxStages;
+
     private Image elevActiveCallDownArrow;
     private Image elevInactiveCallDownArrow;
+
+    private int m_CountStages=0;
+
 
     public CallsControll(int CountStages) {
 
@@ -35,6 +40,7 @@ public class CallsControll extends AnchorPane {
             throw new RuntimeException(exception);
         }
 
+        m_CountStages=CountStages;
         CreateStages(CountStages);
 
         SetStageDownActive(2);
@@ -42,11 +48,21 @@ public class CallsControll extends AnchorPane {
 
     }
 
-    private void CreateStages(int NumberStages) {
+    /**
+     * @param NumberStages
+     * @throws InvalidParameterException
+     */
+    private void CreateStages(int NumberStages) throws InvalidParameterException {
 
-        for(int i=0;i<=NumberStages;i++){
-            vBoxStages.getChildren().add(new CallsStageItem(i));
+        if(NumberStages>0){
+            for(int i=0;i<=NumberStages;i++){
+                vBoxStages.getChildren().add(new CallsStageItem(i));
+            }
         }
+        else{
+            throw new InvalidParameterException("Check input Parameter");
+        }
+
 
     }
 

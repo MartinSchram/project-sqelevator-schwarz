@@ -1,10 +1,11 @@
 package at.fhhagenberg.sqelevator;
 
-import at.fhhagenberg.sqelevator.model.IElevator;
+import sqelevator.IElevator;
 
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
+import java.rmi.RMISecurityManager;
 import java.rmi.RemoteException;
 
 
@@ -19,6 +20,8 @@ public class ElevatorExample {
 	public static void main(String[] args) {
 
 		try {
+//			System.setSecurityManager(new RMISecurityManager());
+
 			IElevator controller = (IElevator) Naming.lookup("rmi://localhost/ElevatorSim");
 			ElevatorExample client = new ElevatorExample(controller);
 

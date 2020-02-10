@@ -1,5 +1,7 @@
 package at.fhhagenberg.sqelevator.model;
 
+import sqelevator.IElevator;
+
 import java.rmi.RemoteException;
 
 /**

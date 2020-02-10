@@ -4,6 +4,7 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.util.Observable;
 
+import sqelevator.IElevator;
 import at.fhhagenberg.sqelevator.model.*;
 
 /**
