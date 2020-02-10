@@ -38,19 +38,29 @@ public class MainAppClass extends Application {
 
 	}
 
+	private static ElevatorUI UiController;
+
+
 	@Override
 	public void start(Stage stage) throws Exception {
 		// TODO Auto-generated method stub
 		try {
 
-
+			// initializing Ui
 			FXMLLoader myLoader = new FXMLLoader(getClass().getResource("view/ElevatorUI.fxml"));
 			Pane myPane = myLoader.load();
-			ElevatorUI controller= myLoader.<ElevatorUI>getController();
-			controller.SetupUi(2,10);
+			UiController= myLoader.<ElevatorUI>getController();
+
+			// Elevator Controller
+			ElevatorController elevCtrl=new ElevatorController();
+			elevCtrl.ConnectRMI();
+			int FloorCount=  elevCtrl.BackEnd.getFloorNum();
+			int ElevatorCount= elevCtrl.BackEnd.getElevatorNum();
+
+			UiController.SetupUi(2,10);
 
 
-			controller.SetPayload(0,100);
+			UiController.SetPayload(0,100);
 
 			stage.setTitle("ControllerUI");
 			stage.setScene(new Scene(myPane, myPane.getWidth(), myPane.getHeight()));

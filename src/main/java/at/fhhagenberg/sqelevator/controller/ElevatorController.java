@@ -42,9 +42,8 @@ public class ElevatorController extends Observable {
 	 * @param pelevs number of elevators in building
 	 * @param pfl    number of floors in building
 	 */
-	public ElevatorController(int pelevs, int pfl) {
-		this.elevatorCount = pelevs;
-		this.floors = pfl;
+	public ElevatorController() {
+
 	}
 	
 	/**
