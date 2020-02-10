@@ -19,7 +19,7 @@ class ElevatorDataTest {
 		    assertTrue(thrown.getMessage().contains("The floor number does not exist"));
 
 	}
-	
+
 	@Test
 	void testOutofLowerBoundsFloorServiceSet() {
 		ElevatorData ev = new ElevatorData(1,2);

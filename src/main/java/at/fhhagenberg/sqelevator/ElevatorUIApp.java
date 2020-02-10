@@ -3,6 +3,7 @@ package at.fhhagenberg.sqelevator;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import at.fhhagenberg.sqelevator.view.ElevatorUI;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -23,8 +24,14 @@ public class ElevatorUIApp extends Application {
 			FXMLLoader myLoader = new FXMLLoader(getClass().getResource("view/ElevatorUI.fxml"));
 
 			Pane myPane = myLoader.load();
-	        stage.setTitle("ControllerUI");
 
+			ElevatorUI controller= myLoader.<ElevatorUI>getController();
+			controller.SetupUi(2,10);
+
+
+			controller.SetPayload(0,100);
+
+	        stage.setTitle("ControllerUI");
 	        stage.setScene(new Scene(myPane, myPane.getWidth(), myPane.getHeight()));
 	        stage.minHeightProperty().setValue(300);
 	        stage.minWidthProperty().setValue(250);

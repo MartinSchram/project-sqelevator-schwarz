@@ -7,9 +7,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<?import at.fhhagenberg.sqelevator.view.OneElevatorUIController?>
-<?import at.fhhagenberg.sqelevator.view.CallsControll?>
-<?import at.fhhagenberg.sqelevator.view.StatusControll?>
 
 <AnchorPane minHeight="800.0" minWidth="1500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="at.fhhagenberg.sqelevator.view.ElevatorUI">
    <children>
@@ -17,12 +14,9 @@
          <content>
             <AnchorPane>
                <children>
-                  <FlowPane layoutX="121.0" layoutY="66.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+                  <FlowPane  fx:id="flowPaneContainer" layoutX="121.0" layoutY="66.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                      <children>
-                        <OneElevatorUIController fx:id="elev1" ></OneElevatorUIController>
-                        <OneElevatorUIController fx:id="elev2"></OneElevatorUIController>
-                         <CallsControll fx:id="callsView"></CallsControll>
-                         <StatusControll fx:id="statusControll"></StatusControll>
+
                      </children>
                   </FlowPane>
                </children>
