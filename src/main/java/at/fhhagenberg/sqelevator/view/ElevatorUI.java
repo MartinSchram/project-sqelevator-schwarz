@@ -6,6 +6,9 @@ import java.net.URL;
 import java.security.InvalidParameterException;
 import java.util.*;
 
+import at.fhhagenberg.sqelevator.model.Elevator;
+import at.fhhagenberg.sqelevator.model.ElevatorActions;
+import at.fhhagenberg.sqelevator.model.SystemData;
 import javafx.beans.InvalidationListener;
 import javafx.beans.binding.ListBinding;
 import javafx.collections.FXCollections;
@@ -22,14 +25,17 @@ public class ElevatorUI implements Initializable, Observer {
 	@FXML
     private FlowPane flowPaneContainer;
 
-	private Vector<OneElevatorUIController> m_ElevatorVector;
+    private ObservableList<OneElevatorUIController> m_ElevatorVector=FXCollections.observableArrayList();
+
 
 	private int CountElevatorStages;
+
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-        m_ElevatorVector=new Vector<OneElevatorUIController>();
+//        m_ElevatorVector=new Vector<OneElevatorUIController>();
 
 	}
 
@@ -79,7 +85,7 @@ public class ElevatorUI implements Initializable, Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-
+//        SystemData test=(SystemData)arg;
         var test= arg;
 
     }
