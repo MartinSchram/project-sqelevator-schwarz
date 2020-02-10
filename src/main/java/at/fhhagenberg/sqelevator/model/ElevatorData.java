@@ -23,8 +23,6 @@ public class ElevatorData implements Cloneable {
 
 	private int target;
 
-	private int error;
-
 	private boolean committedDirIsUp;
 
 	private boolean[] elevatorButtons;
@@ -125,14 +123,6 @@ public class ElevatorData implements Cloneable {
 		return this.target;
 	}
 
-	/**
-	 * Getter for error
-	 * 
-	 * @return current error
-	 */
-	public int GetError() {
-		return this.error;
-	}
 
 	/**
 	 * Getter for committedDirIsUp
@@ -239,14 +229,6 @@ public class ElevatorData implements Cloneable {
 		this.committedDirIsUp = is;
 	}
 
-	/**
-	 * Setter for error
-	 * 
-	 * @param val to be set
-	 */
-	public void SetError(int val) {
-		this.error = val;
-	}
 
 	/**
 	 * Setter for servcedfloor.

@@ -2,7 +2,6 @@ package at.fhhagenberg.sqelevator.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.rmi.RemoteException;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,12 +28,12 @@ class BuildingTest {
 			Mockito.when(iMock.getClockTick()).thenReturn((long) 1);
 			assertEquals(1,b.GetClockTick());
 		} catch (Exception e) {
-			fail("Exception thrown at TestUpdateTarget: "+ e.toString());
+			fail("Exception thrown at TestGetClockTick: "+ e.toString());
 		}			
 	}
 	
 	@Test
-	void TestoutOfBoundsGetFloorButtonUp() {
+	void TestoutOfUpperBoundsGetFloorButtonUp() {
 		Building b = new Building(2,iMock);
 		
 		try {
@@ -45,12 +44,12 @@ class BuildingTest {
 
 			    assertTrue(thrown.getMessage().contains("The floor number does not exist"));
 		} catch (Exception e) {
-			fail("Exception thrown at TestUpdateTarget: "+ e.toString());
+			fail("Exception thrown at TestoutOfUpperBoundsGetFloorButtonUp: "+ e.toString());
 		}			
 	}
 	
 	@Test
-	void TestoutOfBoundsGetFloorButtonDwon() {
+	void TestoutOfUpperBoundsGetFloorButtonDwon() {
 		Building b = new Building(2,iMock);
 		
 		try {
@@ -61,7 +60,39 @@ class BuildingTest {
 
 			    assertTrue(thrown.getMessage().contains("The floor number does not exist"));
 		} catch (Exception e) {
-			fail("Exception thrown at TestUpdateTarget: "+ e.toString());
+			fail("Exception thrown at TestoutOfUpperBoundsGetFloorButtonDwon: "+ e.toString());
+		}			
+	}
+	
+	@Test
+	void TestoutOfLowerBoundsGetFloorButtonUp() {
+		Building b = new Building(2,iMock);
+		
+		try {
+			IllegalArgumentException thrown =
+			        assertThrows(IllegalArgumentException.class,
+			           () -> b.GetFloorButtonUp(-1),
+			           " expected floor number out of bounds!");
+
+			    assertTrue(thrown.getMessage().contains("The floor number does not exist"));
+		} catch (Exception e) {
+			fail("Exception thrown at TestoutOfLowerBoundsGetFloorButtonUp: "+ e.toString());
+		}			
+	}
+	
+	@Test
+	void TestoutOfLowerBoundsGetFloorButtonDwon() {
+		Building b = new Building(2,iMock);
+		
+		try {
+			IllegalArgumentException thrown =
+			        assertThrows(IllegalArgumentException.class,
+			           () -> b.GetFloorButtonDown(-1),
+			           " expected floor number out of bounds!");
+
+			    assertTrue(thrown.getMessage().contains("The floor number does not exist"));
+		} catch (Exception e) {
+			fail("Exception thrown at TestoutOfLowerBoundsGetFloorButtonDwon: "+ e.toString());
 		}			
 	}
 	
@@ -75,7 +106,7 @@ class BuildingTest {
 			assertEquals(true,b.GetFloorButtonUp(1));
 			
 		} catch (Exception e) {
-			fail("Exception thrown at TestUpdateTarget: "+ e.toString());
+			fail("Exception thrown at TestoutInBoundsGetFloorButtonUp: "+ e.toString());
 		}			
 	}
 	
@@ -89,7 +120,7 @@ class BuildingTest {
 			assertEquals(true,b.GetFloorButtonDown(1));
 			
 		} catch (Exception e) {
-			fail("Exception thrown at TestUpdateTarget: "+ e.toString());
+			fail("Exception thrown at TestoutInBoundsGetFloorButtonDown: "+ e.toString());
 		}			
 	}
 	
@@ -116,6 +147,87 @@ class BuildingTest {
 		assertEquals(1,e.GetTarget());
 		assertEquals(ret[1],false);
 		
+	}
+	
+	@Test
+	void TestBuildingStatesNotChanged() {
+		Building b = new Building(2,iMock);
+		
+		try {
+			Mockito.when(iMock.getFloorButtonUp(0)).thenReturn(true);
+			b.Update();
+			b.StoreState();
+			assertEquals(false,b.StateChanged());
+			
+		} catch (Exception e) {
+			fail("Exception thrown at TestBuildingStatesNotChanged: "+ e.toString());
+		}			
+	}
+	
+	@Test
+	void TestBuildingUpStatesChanged() {
+		Building b = new Building(2,iMock);
+		
+		try {
+			Mockito.when(iMock.getFloorButtonUp(0)).thenReturn(true);
+			b.Update();
+			b.StoreState();
+			Mockito.when(iMock.getFloorButtonUp(1)).thenReturn(true);
+			assertEquals(true,b.StateChanged());
+			
+		} catch (Exception e) {
+			fail("Exception thrown at TestBuildingUpStatesChanged: "+ e.toString());
+		}			
+	}
+	
+	@Test
+	void TestBuildingDownStatesChanged() {
+		Building b = new Building(2,iMock);
+		
+		try {
+			Mockito.when(iMock.getFloorButtonDown(0)).thenReturn(true);
+			b.Update();
+			b.StoreState();
+			Mockito.when(iMock.getFloorButtonDown(0)).thenReturn(false);
+			assertEquals(true,b.StateChanged());
+			
+		} catch (Exception e) {
+			fail("Exception thrown at TestBuildingDownStatesChanged: "+ e.toString());
+		}			
+	}
+	
+	@Test
+	void TestSetBuildingDataConsistensyDown() {
+		Building b = new Building(2,iMock);
+		
+		try {
+			Mockito.when(iMock.getFloorButtonDown(0)).thenReturn(true);
+			b.Update();
+			BuildingData bd = b.GetFloorButtonDownStates();
+			
+			assertEquals(true,bd.GetStatus(0));
+			assertEquals(false,bd.GetStatus(1));
+			
+		} catch (Exception e) {
+			fail("Exception thrown at TestSetBuildingDataConsistensyDown: "+ e.toString());
+		}			
+	}
+	
+	@Test
+	void TestSetBuildingDataConsistensyUp() {
+		Building b = new Building(2,iMock);
+		
+		try {
+			Mockito.when(iMock.getFloorButtonUp(0)).thenReturn(true);
+			b.Update();
+			BuildingData bd = b.GetFloorButtonUpStates();
+			
+			assertEquals(true,bd.GetStatus(0));
+			assertEquals(false,bd.GetStatus(1));
+			
+		} catch (Exception e) {
+			fail("Exception thrown at TestSetBuildingDataConsistensyUp: "+ e.toString());
+		}			
 	}
 
 }

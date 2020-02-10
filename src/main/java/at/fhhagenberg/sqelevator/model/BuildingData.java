@@ -41,12 +41,4 @@ public class BuildingData {
 		}
 		
 	}
-
-	/**
-	 * Clone to get shallow copy.
-	 */
-	@Override
-	protected BuildingData clone() throws CloneNotSupportedException {
-		return (BuildingData) super.clone();
-	}
 }

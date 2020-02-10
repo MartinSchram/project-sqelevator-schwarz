@@ -125,7 +125,7 @@ public class Building {
 	 * @throws CloneNotSupportedException
 	 */
 	public BuildingData GetFloorButtonDownStates() throws CloneNotSupportedException {
-		return this.iStateButtonDown.clone();
+		return this.iStateButtonDown;
 	}
 
 	/**
@@ -136,7 +136,7 @@ public class Building {
 	 * @throws CloneNotSupportedException
 	 */
 	public BuildingData GetFloorButtonUpStates() throws CloneNotSupportedException {
-		return this.iStateButtonUp.clone();
+		return this.iStateButtonUp;
 	}
 
 }

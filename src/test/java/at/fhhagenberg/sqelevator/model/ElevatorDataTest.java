@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 class ElevatorDataTest {
 
 	@Test
-	void testOutofUpperBoundsFloorServiceSet() {
+	void testOutofUpperBoundsFloorButtonEnabled() {
 		ElevatorData ev = new ElevatorData(1,2);
 		IllegalArgumentException thrown =
 		        assertThrows(IllegalArgumentException.class,
@@ -21,11 +21,35 @@ class ElevatorDataTest {
 	}
 
 	@Test
-	void testOutofLowerBoundsFloorServiceSet() {
+	void testOutofLowerBoundsFloorButtonEnabled() {
 		ElevatorData ev = new ElevatorData(1,2);
 		IllegalArgumentException thrown =
 		        assertThrows(IllegalArgumentException.class,
 		           () -> ev.SetElevatorButtonAtFloorEnabled(-1, true),
+		           " expected floor number out of bounds!");
+
+		    assertTrue(thrown.getMessage().contains("The floor number does not exist"));
+
+	}
+	
+	@Test
+	void testOutofUpperBoundsFloorServiceSet() {
+		ElevatorData ev = new ElevatorData(1,2);
+		IllegalArgumentException thrown =
+		        assertThrows(IllegalArgumentException.class,
+		           () -> ev.SetFloorIsServiced(3, true),
+		           " expected floor number out of bounds!");
+
+		    assertTrue(thrown.getMessage().contains("The floor number does not exist"));
+
+	}
+	
+	@Test
+	void testOutofLowerBoundsFloorServiceSet() {
+		ElevatorData ev = new ElevatorData(1,2);
+		IllegalArgumentException thrown =
+		        assertThrows(IllegalArgumentException.class,
+		           () -> ev.SetFloorIsServiced(-1, true),
 		           " expected floor number out of bounds!");
 
 		    assertTrue(thrown.getMessage().contains("The floor number does not exist"));

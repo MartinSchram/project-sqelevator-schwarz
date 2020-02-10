@@ -55,6 +55,10 @@ public class ElevatorController extends Observable {
 		this.BackEnd = inst;
 	}
 
+	/**
+	 * Get rmi inst from system
+	 * @return successfully attached
+	 */
 	public boolean ConnectRMI() {
 		try {
 			this.BackEnd = (IElevator) Naming.lookup("rmi://localhost/ElevatorSim");
@@ -63,6 +67,25 @@ public class ElevatorController extends Observable {
 			return false;
 
 		}
+	}
+	
+	/**
+	 * Status flag
+	 * @return TRUE -> switched on 
+	 */
+	public boolean IsOn() {
+		return this.on;
+	}
+	
+	/**
+	 * set rmi inst from manually
+	 * @return successfully attached
+	 */
+	public boolean SetInst(IElevator inst) {
+		if(inst != null) {
+			this.BackEnd = inst;
+			return true;
+		}else return false;
 	}
 
 	/**
@@ -128,7 +151,7 @@ public class ElevatorController extends Observable {
 	 * @return TRUE -> successfully initialized
 	 */
 	public boolean init() {
-		if (!this.on && this.BackEnd != null && GetPropertiesFromBackend()) {
+		if (!this.on && GetPropertiesFromBackend()) {
 			this.GuiActions = new ElevatorActions[elevatorCount];
 			this.elevators = new Elevator[elevatorCount];
 			this.observerdata = new SystemData(elevatorCount);
@@ -166,7 +189,7 @@ public class ElevatorController extends Observable {
 			for (Elevator e : elevators)
 				e.UpdateData();
 			building.Update();
-			ElevatorScheduler.Schedule(elevators, GuiActions, building);
+			ElevatorScheduler.Schedule(elevators, GuiActions.clone(), building);
 			for (Elevator e : elevators)
 				e.UpdateTarget();
 			Thread.sleep(building.GetClockTick() * 3);
@@ -179,7 +202,7 @@ public class ElevatorController extends Observable {
 	}
 
 	private boolean GetPropertiesFromBackend() {
-		if (this.floors != 0 || this.elevatorCount != 0) {
+		if (this.floors == 0 || this.elevatorCount == 0) {
 			try {
 				SetElevatorCount(BackEnd.getElevatorNum());
 				SetFloorCount(BackEnd.getFloorNum());

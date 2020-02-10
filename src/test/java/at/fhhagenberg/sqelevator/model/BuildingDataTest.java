@@ -31,6 +31,29 @@ class BuildingDataTest {
 	}
 	
 	@Test
+	void testOutofLowerrBoundsSetFloorButtonPressed() {
+		BuildingData ev = new BuildingData(3);
+		IllegalArgumentException thrown =
+		        assertThrows(IllegalArgumentException.class,
+		           () -> ev.SetStatus(-1, true),
+		           " expected floor number out of bounds!");
+
+		    assertTrue(thrown.getMessage().contains("The floor number does not exist"));
+
+	}
+
+	@Test
+	void testOutofLowerBoundsGetFloorButtonPressed() {
+		BuildingData ev = new BuildingData(3);
+		IllegalArgumentException thrown =
+		        assertThrows(IllegalArgumentException.class,
+		           () -> ev.GetStatus(-1),
+		           " expected floor number out of bounds!");
+
+		    assertTrue(thrown.getMessage().contains("The floor number does not exist"));
+	}
+	
+	@Test
 	void testInBoundsGetSetFloorButtonPressed() {
 		BuildingData ev = new BuildingData(3);
 		ev.SetStatus(2, true);

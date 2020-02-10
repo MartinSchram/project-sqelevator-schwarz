@@ -92,5 +92,13 @@ public class ElevatorTest {
 		
 		assertEquals(true,e.setInstance(iMock));
 	}
+	
+	@Test
+	void TestMultInstantioationElevator() {
+		Elevator e = new Elevator(0,2);
+		
+		assertEquals(true,e.setInstance(iMock));
+		assertEquals(false,e.setInstance(iMock));
+	}
 
 }
