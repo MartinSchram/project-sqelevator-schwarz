@@ -24,8 +24,7 @@ public class ElevatorController extends Observable {
 	private ElevatorScheduler scheduler;
 
 	private SystemData observerdata;
-	
-	
+
 	/**
 	 * Backend interfce binded to gui
 	 */
@@ -37,31 +36,28 @@ public class ElevatorController extends Observable {
 	public ElevatorActions[] GuiActions;
 
 	/**
-	 * ctor of controller
-	 * 
-	 * @param pelevs number of elevators in building
-	 * @param pfl    number of floors in building
+	 * default ctor of controller
 	 */
 	public ElevatorController() {
 
 	}
-	
+
 	/**
 	 * ctor of controller
 	 * 
 	 * @param pelevs number of elevators in building
 	 * @param pfl    number of floors in building
-	 * @param inst   instance  of backend
+	 * @param inst   instance of backend
 	 */
-	public ElevatorController(int pelevs, int pfl,IElevator inst) {
+	public ElevatorController(int pelevs, int pfl, IElevator inst) {
 		this.elevatorCount = pelevs;
 		this.floors = pfl;
 		this.BackEnd = inst;
 	}
-	
+
 	public boolean ConnectRMI() {
 		try {
-			this.BackEnd =(IElevator) Naming.lookup("rmi://localhost/ElevatorSim");
+			this.BackEnd = (IElevator) Naming.lookup("rmi://localhost/ElevatorSim");
 			return true;
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			return false;
@@ -71,20 +67,22 @@ public class ElevatorController extends Observable {
 
 	/**
 	 * Setter for the elevator count
+	 * 
 	 * @param count number of elevators in building
 	 */
 	public void SetElevatorCount(int count) {
-		this.elevatorCount=count;
+		this.elevatorCount = count;
 	}
-	
+
 	/**
 	 * Setter for the floor count
+	 * 
 	 * @param count number of floors in building
 	 */
 	public void SetFloorCount(int count) {
-		this.floors=count;
+		this.floors = count;
 	}
-	
+
 	/**
 	 * Switches the elevator in on mode and calls init() for all elevators
 	 * 
@@ -130,13 +128,13 @@ public class ElevatorController extends Observable {
 	 * @return TRUE -> successfully initialized
 	 */
 	public boolean init() {
-		if (!this.on && this.BackEnd != null&& this.floors != 0 && this.elevatorCount !=0) {
+		if (!this.on && this.BackEnd != null && GetPropertiesFromBackend()) {
 			this.GuiActions = new ElevatorActions[elevatorCount];
 			this.elevators = new Elevator[elevatorCount];
 			this.observerdata = new SystemData(elevatorCount);
 
 			try {
-				
+
 				for (int i = 0; i < elevators.length; i++) {
 					elevators[i] = new Elevator(i, floors, this.BackEnd);
 				}
@@ -175,8 +173,21 @@ public class ElevatorController extends Observable {
 			for (Elevator e : elevators)
 				e.UpdateData();
 			setChanged();
-	        notifyObservers();
+			notifyObservers();
 		}
+	}
+
+	private boolean GetPropertiesFromBackend() {
+		if (this.floors != 0 || this.elevatorCount != 0) {
+			try {
+				SetElevatorCount(BackEnd.getElevatorNum());
+				SetFloorCount(BackEnd.getFloorNum());
+				return true;
+			} catch (RemoteException e) {
+				return false;
+			}
+		} else
+			return true;
 	}
 
 }
