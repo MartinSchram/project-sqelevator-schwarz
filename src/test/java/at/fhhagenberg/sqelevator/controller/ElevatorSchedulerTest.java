@@ -2,7 +2,6 @@ package at.fhhagenberg.sqelevator.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.rmi.RemoteException;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,10 +10,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import at.fhhagenberg.sqelevator.model.Building;
-import at.fhhagenberg.sqelevator.model.BuildingData;
 import at.fhhagenberg.sqelevator.model.Elevator;
 import at.fhhagenberg.sqelevator.model.ElevatorActions;
-import at.fhhagenberg.sqelevator.model.ElevatorData;
 import sqelevator.IElevator;
 
 
@@ -25,7 +22,7 @@ public class ElevatorSchedulerTest {
 	IElevator iMock;
 
 	@Test
-	void SchedulerNoSchedulingTest() {
+	void ManualSchedulingTest() {
 		
 		Elevator[] e = { new Elevator(0, 2, iMock) };
 

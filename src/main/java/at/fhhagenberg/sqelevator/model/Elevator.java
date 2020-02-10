@@ -65,6 +65,7 @@ public class Elevator {
 	public void SetActions(ElevatorActions a) {
 		paction = a;
 	}
+	
 
 	/**
 	 * Gets a clone of the data structure of ElevatorData of current elevator
@@ -78,10 +79,16 @@ public class Elevator {
 		return this.pdata.clone();
 	}
 	
+	
 	public boolean[] GetServicedFloors() {
 		return this.pdata.GetservicesFloors();
 	}
 
+	
+	public int GetTarget() {
+		return this.pdata.GetTarget();
+	}
+	
 	/**
 	 * Updates the data from the rmi and stores in internal ElevatorData inst.
 	 * 

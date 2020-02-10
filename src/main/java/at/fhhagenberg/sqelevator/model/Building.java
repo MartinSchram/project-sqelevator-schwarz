@@ -30,8 +30,9 @@ public class Building {
 		this.floors = pfloors;
 		this.hStateButtonDown = new BuildingData(floors);
 		this.hStateButtonUp = new BuildingData(floors);
-//		ResetHStates();
-//		ResetIStates();
+		this.iStateButtonUp = new BuildingData(floors);
+		this.iStateButtonDown = new BuildingData(floors);
+
 	}
 	
 	
@@ -52,11 +53,13 @@ public class Building {
 	 * @throws RemoteException rmi-interface hung up
 	 */
 	public boolean GetFloorButtonUp(int floor) throws RemoteException {
-		if (floor > floors || floor < 0) {
+
+		if (floor >= floors || floor < 0) {
 			throw new IllegalArgumentException("The floor number does not exist");
 		} else {
 			return inst.getFloorButtonUp(floor);
 		}
+
 	}
 
 	/**
@@ -67,11 +70,13 @@ public class Building {
 	 * @throws RemoteException rmi-interface hung up
 	 */
 	public boolean GetFloorButtonDown(int floor) throws RemoteException {
-		if (floor > floors || floor < 0) {
+
+		if (floor >= floors || floor < 0) {
 			throw new IllegalArgumentException("The floor number does not exist");
 		} else {
 			return inst.getFloorButtonDown(floor);
 		}
+
 	}
 
 	/**
@@ -81,8 +86,8 @@ public class Building {
 	 */
 	public void Update() throws RemoteException {
 		for (int i = 0; i < floors; i++) {
-			iStateButtonUp.Status[i] = GetFloorButtonUp(i);
-			iStateButtonDown.Status[i] = GetFloorButtonDown(i);
+			iStateButtonUp.SetStatus(i, GetFloorButtonUp(i));
+			iStateButtonDown.SetStatus(i, GetFloorButtonDown(i));
 		}
 	}
 
@@ -93,8 +98,8 @@ public class Building {
 	 */
 	public void StoreState() throws RemoteException {
 		for (int i = 0; i < floors; i++) {
-			hStateButtonUp.Status[i] = iStateButtonUp.Status[i];
-			hStateButtonDown.Status[i] = iStateButtonDown.Status[i];
+			hStateButtonUp.SetStatus(i,iStateButtonUp.GetStatus(i));
+			hStateButtonDown.SetStatus(i,iStateButtonDown.GetStatus(i));
 		}
 	}
 
@@ -106,7 +111,7 @@ public class Building {
 	 */
 	public boolean StateChanged() throws RemoteException {
 		for (int i = 0; i < floors; i++) {
-			if (iStateButtonUp.Status[i] != GetFloorButtonUp(i) || iStateButtonDown.Status[i] != GetFloorButtonDown(i))
+			if (iStateButtonUp.GetStatus(i) != GetFloorButtonUp(i) || iStateButtonDown.GetStatus(i) != GetFloorButtonDown(i))
 				return true;
 		}
 		return false;
@@ -132,22 +137,6 @@ public class Building {
 	 */
 	public BuildingData GetFloorButtonUpStates() throws CloneNotSupportedException {
 		return this.iStateButtonUp.clone();
-	}
-
-	private void ResetIStates() {
-		for (int i = 0; i < floors; i++) {
-			iStateButtonUp.Status[i] = false;
-			iStateButtonDown.Status[i] = false;
-		}
-
-	}
-
-	private void ResetHStates() {
-		for (int i = 0; i < floors; i++) {
-			hStateButtonUp.Status[i] = false;
-			hStateButtonDown.Status[i] = false;
-		}
-
 	}
 
 }

@@ -2,18 +2,17 @@ package at.fhhagenberg.sqelevator.model;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import at.fhhagenberg.sqelevator.model.ElevatorData;
-
 import org.junit.jupiter.api.Test;
 
-class ElevatorDataTest {
+class BuildingDataTest {
 
+	
 	@Test
-	void testOutofUpperBoundsFloorServiceSet() {
-		ElevatorData ev = new ElevatorData(1,2);
+	void testOutofUpperBoundsSetFloorButtonPressed() {
+		BuildingData ev = new BuildingData(3);
 		IllegalArgumentException thrown =
 		        assertThrows(IllegalArgumentException.class,
-		           () -> ev.SetElevatorButtonAtFloorEnabled(3, true),
+		           () -> ev.SetStatus(3, true),
 		           " expected floor number out of bounds!");
 
 		    assertTrue(thrown.getMessage().contains("The floor number does not exist"));
@@ -21,23 +20,22 @@ class ElevatorDataTest {
 	}
 
 	@Test
-	void testOutofLowerBoundsFloorServiceSet() {
-		ElevatorData ev = new ElevatorData(1,2);
+	void testOutofUpperBoundsGetFloorButtonPressed() {
+		BuildingData ev = new BuildingData(3);
 		IllegalArgumentException thrown =
 		        assertThrows(IllegalArgumentException.class,
-		           () -> ev.SetElevatorButtonAtFloorEnabled(-1, true),
+		           () -> ev.GetStatus(3),
 		           " expected floor number out of bounds!");
 
 		    assertTrue(thrown.getMessage().contains("The floor number does not exist"));
-
 	}
 	
 	@Test
-	void testInBoundsFloorServiceSet() {
-		ElevatorData ev = new ElevatorData(1,2);
-		ev.SetElevatorButtonAtFloorEnabled(1, true);
-		boolean[] eb = ev.GetElevatorButtons();
-		assertEquals(true, eb[1]);
+	void testInBoundsGetSetFloorButtonPressed() {
+		BuildingData ev = new BuildingData(3);
+		ev.SetStatus(2, true);
+		
+		assertEquals(true,ev.GetStatus(2));
+		assertEquals(false,ev.GetStatus(1));	
 	}
-	
 }

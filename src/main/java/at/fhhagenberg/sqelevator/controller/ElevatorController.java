@@ -173,7 +173,8 @@ public class ElevatorController extends Observable {
 			for (Elevator e : elevators)
 				e.UpdateData();
 			setChanged();
-			notifyObservers();
+			SystemData sd = GetObserverData();
+			notifyObservers(sd);
 		}
 	}
 

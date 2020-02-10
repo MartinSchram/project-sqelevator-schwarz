@@ -5,13 +5,41 @@ package at.fhhagenberg.sqelevator.model;
  *
  */
 public class BuildingData {
-	public boolean[] Status;
+	private boolean[] status;
 
 	public BuildingData(int floor) {
-		this.Status = new boolean[floor];
+		this.status = new boolean[floor];
 		for(int i =0; i<floor;i++) {
-			this.Status[i]=false;
+			this.status[i]=false;
 		}
+	}
+	
+	/**
+	 * Getter for status
+	 * @param idx index of floor
+	 * @return TRUE -> enabled
+	 */
+	public boolean GetStatus(int fl) {
+		if (fl >= status.length || fl < 0) {
+			throw new IllegalArgumentException("The floor number does not exist");
+		} else {
+			return this.status[fl];
+		}
+	}
+	
+	
+	/** 
+	 * Setter for status
+	 * @param idx idx index of floor
+	 * @param val TRUE -> to be set to enabled
+	 */
+	public void SetStatus(int fl,boolean val) {
+		if (fl >= status.length || fl < 0) {
+			throw new IllegalArgumentException("The floor number does not exist");
+		} else {
+			this.status[fl] = val;
+		}
+		
 	}
 
 	/**

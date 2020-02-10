@@ -255,7 +255,7 @@ public class ElevatorData implements Cloneable {
 	 * @throws IllegalArgumentException on non existing floors
 	 */
 	public void SetFloorIsServiced(int fl, boolean is) {
-		if (fl > servicesFloors.length || fl < 0) {
+		if (fl >= servicesFloors.length || fl < 0) {
 			throw new IllegalArgumentException("The floor number does not exist");
 		} else {
 			this.servicesFloors[fl] = is;
@@ -281,7 +281,7 @@ public class ElevatorData implements Cloneable {
 	 * @throws IllegalArgumentException on non existing floors
 	 */
 	public void SetElevatorButtonAtFloorEnabled(int fl, boolean is) {
-		if (fl > elevatorButtons.length || fl < 0) {
+		if (fl >= elevatorButtons.length || fl < 0) {
 			throw new IllegalArgumentException("The floor number does not exist");
 		} else {
 			this.elevatorButtons[fl] = is;
