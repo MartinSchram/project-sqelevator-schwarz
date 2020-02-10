@@ -15,7 +15,8 @@ import at.fhhagenberg.sqelevator.model.BuildingData;
 import at.fhhagenberg.sqelevator.model.Elevator;
 import at.fhhagenberg.sqelevator.model.ElevatorActions;
 import at.fhhagenberg.sqelevator.model.ElevatorData;
-import at.fhhagenberg.sqelevator.model.IElevator;
+import sqelevator.IElevator;
+
 
 @ExtendWith(MockitoExtension.class)
 public class ElevatorSchedulerTest {

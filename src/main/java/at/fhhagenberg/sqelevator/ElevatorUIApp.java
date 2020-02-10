@@ -39,15 +39,15 @@ public class ElevatorUIApp extends Application {
 	        stage.minHeightProperty().setValue(300);
 	        stage.minWidthProperty().setValue(250);
 	        stage.show();
-			ElevatorController ev = new ElevatorController(ELEVATORSCOUNT,FLOORS);
-			// init bindings -> for(i<ELEVATORSCOUNT) ElevatorController.GuiActions[i] = gui binding
-			ev.init(null);
-			// ev.addObserver(GUI);
-			
-			new Thread(() -> {
-		      ev.RunCyclic();
-		    }).start();
-			// new thread start: ev.RunCyclic();
+//			ElevatorController ev = new ElevatorController(ELEVATORSCOUNT,FLOORS);
+//			// init bindings -> for(i<ELEVATORSCOUNT) ElevatorController.GuiActions[i] = gui binding
+//			ev.init();
+//			// ev.addObserver(GUI);
+//			
+//			new Thread(() -> {
+//		      ev.RunCyclic();
+//		    }).start();
+//			// new thread start: ev.RunCyclic();
 		}
 		 catch (Exception ex) {
 	            Alert alert = new Alert(Alert.AlertType.ERROR);

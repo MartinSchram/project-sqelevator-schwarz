@@ -71,6 +71,22 @@ public class ElevatorController extends Observable {
 	}
 
 	/**
+	 * Setter for the elevator count
+	 * @param count number of elevators in building
+	 */
+	public void SetElevatorCount(int count) {
+		this.elevatorCount=count;
+	}
+	
+	/**
+	 * Setter for the floor count
+	 * @param count number of floors in building
+	 */
+	public void SetFloorCount(int count) {
+		this.floors=count;
+	}
+	
+	/**
 	 * Switches the elevator in on mode and calls init() for all elevators
 	 * 
 	 * @return TRUE -> successfully switched on
@@ -115,7 +131,7 @@ public class ElevatorController extends Observable {
 	 * @return TRUE -> successfully initialized
 	 */
 	public boolean init() {
-		if (!this.on && this.BackEnd != null) {
+		if (!this.on && this.BackEnd != null&& this.floors != 0 && this.elevatorCount !=0) {
 			this.GuiActions = new ElevatorActions[elevatorCount];
 			this.elevators = new Elevator[elevatorCount];
 			this.observerdata = new SystemData(elevatorCount);
