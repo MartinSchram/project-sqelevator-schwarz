@@ -178,8 +178,7 @@ public class ElevatorController extends Observable {
 			try {
 				RunCycle();
 			} catch (RemoteException | CloneNotSupportedException | InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				this.SwitchOff();
 			}
 		}
 	}

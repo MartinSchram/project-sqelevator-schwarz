@@ -1,9 +1,6 @@
 package at.fhhagenberg.sqelevator.controller;
 
-
 import static org.junit.jupiter.api.Assertions.*;
-
-import java.rmi.RemoteException;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,8 +8,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import at.fhhagenberg.sqelevator.model.Elevator;
-import at.fhhagenberg.sqelevator.model.ElevatorActions;
 import sqelevator.IElevator;
 
 
