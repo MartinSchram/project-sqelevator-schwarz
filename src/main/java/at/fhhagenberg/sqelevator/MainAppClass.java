@@ -5,6 +5,7 @@ import java.io.StringWriter;
 import java.rmi.Naming;
 
 import at.fhhagenberg.sqelevator.controller.ElevatorController;
+import at.fhhagenberg.sqelevator.model.Elevator;
 import at.fhhagenberg.sqelevator.view.ElevatorUI;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -38,7 +39,17 @@ public class MainAppClass extends Application {
 
 	}
 
-	private static ElevatorUI UiController;
+
+
+	private static ElevatorUI m_UiController;
+	private static ElevatorController m_ElevatorConnectionController;
+
+	private static Thread PollingThread;
+
+	public Runnable runnable = () -> {
+		m_ElevatorConnectionController.RunCyclic();
+	};
+
 
 
 	@Override
@@ -49,18 +60,23 @@ public class MainAppClass extends Application {
 			// initializing Ui
 			FXMLLoader myLoader = new FXMLLoader(getClass().getResource("view/ElevatorUI.fxml"));
 			Pane myPane = myLoader.load();
-			UiController= myLoader.<ElevatorUI>getController();
+
+			m_UiController= myLoader.<ElevatorUI>getController();
 
 			// Elevator Controller
-			ElevatorController elevCtrl=new ElevatorController();
-			elevCtrl.ConnectRMI();
-			int FloorCount=  elevCtrl.BackEnd.getFloorNum();
-			int ElevatorCount= elevCtrl.BackEnd.getElevatorNum();
+			m_ElevatorConnectionController=new ElevatorController();
+			m_ElevatorConnectionController.ConnectRMI();
+			int FloorCount=  m_ElevatorConnectionController.BackEnd.getFloorNum();
+			int ElevatorCount= m_ElevatorConnectionController.BackEnd.getElevatorNum();
 
-			UiController.SetupUi(2,10);
-
-
-			UiController.SetPayload(0,100);
+			// setup Ui with the count of Elevator and Floor count
+			m_UiController.SetupUi(ElevatorCount,FloorCount);
+			m_ElevatorConnectionController.addObserver(m_UiController);
+			m_ElevatorConnectionController.SwitchOn();
+			PollingThread = new Thread(runnable);
+			PollingThread.start();
+//			m_ElevatorConnectionController.RunCyclic();
+//			m_UiController.SetPayload(0,100);
 
 			stage.setTitle("ControllerUI");
 			stage.setScene(new Scene(myPane, myPane.getWidth(), myPane.getHeight()));

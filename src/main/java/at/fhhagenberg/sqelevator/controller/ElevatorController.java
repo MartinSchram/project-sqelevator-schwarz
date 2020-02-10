@@ -192,7 +192,7 @@ public class ElevatorController extends Observable {
 			ElevatorScheduler.Schedule(elevators, GuiActions.clone(), building);
 			for (Elevator e : elevators)
 				e.UpdateTarget();
-			Thread.sleep(building.GetClockTick() * 3);
+			Thread.sleep(building.GetClockTick());
 			for (Elevator e : elevators)
 				e.UpdateData();
 			setChanged();

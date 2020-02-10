@@ -17,7 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
-public class ElevatorUI implements Initializable{
+public class ElevatorUI implements Initializable, Observer {
 
 	@FXML
     private FlowPane flowPaneContainer;
@@ -77,5 +77,10 @@ public class ElevatorUI implements Initializable{
     }
 
 
+    @Override
+    public void update(Observable o, Object arg) {
 
+        var test= arg;
+
+    }
 }
