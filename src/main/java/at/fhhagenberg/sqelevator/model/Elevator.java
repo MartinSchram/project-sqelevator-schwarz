@@ -1,6 +1,7 @@
 package at.fhhagenberg.sqelevator.model;
 
 import java.rmi.RemoteException;
+import sqelevator.IElevator;
 
 /**
  * @author Martin Schram Class for representing one instance of elevator.

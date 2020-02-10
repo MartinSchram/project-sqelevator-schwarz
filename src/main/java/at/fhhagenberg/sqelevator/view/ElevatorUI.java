@@ -50,6 +50,8 @@ public class ElevatorUI implements Initializable{
                 flowPaneContainer.getChildren().add(elem);
             }
 
+            CountElevatorStages=CountStages;
+
             flowPaneContainer.getChildren().add(new CallsControll(CountStages));
             flowPaneContainer.getChildren().add(new StatusControll());
         }

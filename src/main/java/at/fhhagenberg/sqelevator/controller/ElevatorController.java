@@ -6,6 +6,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Observable;
 
+import sqelevator.IElevator;
 import at.fhhagenberg.sqelevator.model.*;
 
 /**
