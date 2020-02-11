@@ -24,33 +24,33 @@ class OneElevatorUIControllerTest extends ApplicationTest {
 
     private OneElevatorUIController m_Controller;
 
-    @Override
-    public void start(Stage stage) {
-        try {
-            Flow flow = new Flow(OneElevatorUIController.class);
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    @Test
-    void testSetPayloadLabel() {
-
-        int StagesCount=5;
-        String ElevatorName="Elevator 1";
-
-        interact(() -> {
-            m_Controller = new OneElevatorUIController(StagesCount,ElevatorName);
-
-        });
-
-        int PayloadToSet=-50;
-        assertThrows(InvalidParameterException.class,()->{
-            m_Controller.SetPayloadLabel(PayloadToSet);
-        });
-
-
-    }
+//    @Override
+//    public void start(Stage stage) {
+//        try {
+//            Flow flow = new Flow(OneElevatorUIController.class);
+//
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//    }
+//
+//    @Test
+//    void testSetPayloadLabel() {
+//
+//        int StagesCount=5;
+//        String ElevatorName="Elevator 1";
+//
+//        interact(() -> {
+//            m_Controller = new OneElevatorUIController(StagesCount,ElevatorName);
+//
+//        });
+//
+//        int PayloadToSet=-50;
+//        assertThrows(InvalidParameterException.class,()->{
+//            m_Controller.SetPayloadLabel(PayloadToSet);
+//        });
+//
+//
+//    }
 
 }
