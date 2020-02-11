@@ -23,7 +23,7 @@ public class ElevatorController extends Observable {
 	private Elevator[] elevators;
 	private Building building;
 	private ElevatorScheduler scheduler;
-	private ElevatorUI m_UIController;
+	private ElevatorUI uIController;
 	private SystemData observerdata;
 
 	/**
@@ -43,10 +43,9 @@ public class ElevatorController extends Observable {
 
 	}
 
-
 	public ElevatorController(ElevatorUI UIController) {
 		this.addObserver(UIController);
-		m_UIController=UIController;
+		uIController = UIController;
 	}
 
 	/**
@@ -64,6 +63,7 @@ public class ElevatorController extends Observable {
 
 	/**
 	 * Get rmi inst from system
+	 * 
 	 * @return successfully attached
 	 */
 	public boolean ConnectRMI() {
@@ -75,24 +75,27 @@ public class ElevatorController extends Observable {
 
 		}
 	}
-	
+
 	/**
 	 * Status flag
-	 * @return TRUE -> switched on 
+	 * 
+	 * @return TRUE -> switched on
 	 */
 	public boolean IsOn() {
 		return this.on;
 	}
-	
+
 	/**
 	 * set rmi inst from manually
+	 * 
 	 * @return successfully attached
 	 */
 	public boolean SetInst(IElevator inst) {
-		if(inst != null) {
+		if (inst != null) {
 			this.BackEnd = inst;
 			return true;
-		}else return false;
+		} else
+			return false;
 	}
 
 	/**
@@ -164,9 +167,10 @@ public class ElevatorController extends Observable {
 			this.observerdata = new SystemData(elevatorCount);
 
 			try {
-
-				for(int i=0;i<elevatorCount;i++){
-					this.GuiActions[i]=m_UIController.m_ElevatorVector.get(i).oneElevAction;
+				if (uIController != null) {
+					for (int i = 0; i < elevatorCount; i++) {
+						this.GuiActions[i] = uIController.m_ElevatorVector.get(i).oneElevAction;
+					}
 				}
 
 				for (int i = 0; i < elevators.length; i++) {
@@ -212,6 +216,7 @@ public class ElevatorController extends Observable {
 	}
 
 	private boolean GetPropertiesFromBackend() {
+		if(this.BackEnd == null) return false;
 		if (this.floors == 0 || this.elevatorCount == 0) {
 			try {
 				SetElevatorCount(BackEnd.getElevatorNum());

@@ -42,7 +42,7 @@ class ElevatorControllerUnitTest {
 	}
 	
 	@Test
-	void AutoInitializationTest() {
+	void AutoMemberInitializationTest() {
 		ElevatorController ev = new ElevatorController();
 		
 		try {
@@ -56,5 +56,21 @@ class ElevatorControllerUnitTest {
 		assertEquals(true, ev.SwitchOn());
 		
 	}
+	
+	@Test
+	void AutoInitializationTest() {
+		
+		ElevatorController ev = new ElevatorController(1,5,iMock);
+		
+		assertEquals(true, ev.SwitchOn());		
+	}
 
+	@Test
+	void InitializationOnInstFailedTest() {
+		
+		ElevatorController ev = new ElevatorController();
+		
+		assertEquals(false,ev.SetInst(null));	
+		assertEquals(false,ev.SwitchOn());
+	}
 }
