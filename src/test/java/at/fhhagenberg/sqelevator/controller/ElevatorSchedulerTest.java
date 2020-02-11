@@ -62,7 +62,6 @@ public class ElevatorSchedulerTest {
 			
 			assertEquals(1, e[0].GetData().GetTarget());
 
-	        Mockito.verify(iMock).getTarget(0);
 	        
 		} catch (Exception ex) {
 			fail("Exception thrown at SchedulerNoSchedulingTest: "+ ex.toString());
