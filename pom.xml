@@ -13,8 +13,7 @@
 		<sonar.organization>martinschram</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.login>9a28742d68c07f2f3f853743a8d47ecd1b831db5</sonar.login>
-		<sonar.exclusions>src/main/java/at/fhhagenberg/sqelevator/view/*</sonar.exclusions>
-		<sonar.exclusions>src/main/java/at/fhhagenberg/sqelevator/MainAppClass.java</sonar.exclusions>
+		<sonar.exclusions>src/main/java/at/fhhagenberg/sqelevator/view/*, src/main/java/at/fhhagenberg/sqelevator/MainAppClass.java</sonar.exclusions>
 	</properties>
 	<dependencies>
 		<dependency>
