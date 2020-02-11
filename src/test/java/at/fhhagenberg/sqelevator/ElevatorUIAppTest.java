@@ -21,13 +21,13 @@ public class ElevatorUIAppTest {
 		new ElevatorUIApp().start(stage);
 	}
 
-	@Test
-	public void testCall(FxRobot robot) {
-		/*robot.doubleClickOn("tbtnOpModeAuto");
-		robot.doubleClickOn("#b").write("2");
-
-		robot.clickOn("#compute");
-
-		verifyThat(".label.sum", hasText("3.00"));*/
-	}
+//	@Test
+//	public void testCall(FxRobot robot) {
+//		/*robot.doubleClickOn("tbtnOpModeAuto");
+//		robot.doubleClickOn("#b").write("2");
+//
+//		robot.clickOn("#compute");
+//
+//		verifyThat(".label.sum", hasText("3.00"));*/
+//	}
 }
