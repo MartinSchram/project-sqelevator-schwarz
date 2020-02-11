@@ -107,7 +107,7 @@ public class Elevator {
 			pdata.SetElevatorButtonAtFloorEnabled(i, inst.getElevatorButton(idx, i));
 		}
 		pdata.SetTarget(inst.getTarget(idx));
-		pdata.SetCommitedDirIsUp(inst.getCommittedDirection(idx) == 0);
+		pdata.SetCommitedDirIsUp(pdata.GetTarget() >pdata.GetElevatorposition());
 
 	}
 	

@@ -60,7 +60,6 @@ public class ElevatorTest {
 			Mockito.when(iMock.getElevatorSpeed(0)).thenReturn(200);
 			Mockito.when(iMock.getElevatorWeight(0)).thenReturn(100);
 			Mockito.when(iMock.getElevatorButton(0,0)).thenReturn(true);
-			Mockito.when(iMock.getCommittedDirection(0)).thenReturn(1);
 			Mockito.when(iMock.getElevatorAccel(0)).thenReturn(2);
 			
 			r = e.GetData();
@@ -79,8 +78,7 @@ public class ElevatorTest {
 		assertEquals(2, r.GetElevatorfloor());
 		assertEquals(2,r.GetElevatorposition());
 		assertEquals(100, r.GetElevatorweight());
-		assertEquals(1,r.GetTarget());
-		assertEquals(true, r.GetCommittedDirIsUp());		
+		assertEquals(1,r.GetTarget());		
 		assertEquals(true, eb[0]);
 		assertEquals(false, eb[1]);
 		

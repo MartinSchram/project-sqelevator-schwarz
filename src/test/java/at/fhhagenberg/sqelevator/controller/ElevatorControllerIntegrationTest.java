@@ -92,7 +92,6 @@ class ElevatorControllerIntegrationTest implements Observer {
 			Mockito.when(iMock.getElevatorSpeed(0)).thenReturn(200);
 			Mockito.when(iMock.getElevatorWeight(0)).thenReturn(100);
 			Mockito.when(iMock.getElevatorButton(0, 0)).thenReturn(true);
-			Mockito.when(iMock.getCommittedDirection(0)).thenReturn(1);
 			Mockito.when(iMock.getElevatorAccel(0)).thenReturn(2);
 
 			ev.RunCycle();
@@ -100,7 +99,6 @@ class ElevatorControllerIntegrationTest implements Observer {
 			
 			assertEquals(1, this.recv);
 			
-			assertEquals(true,od.GetCommittedDirIsUp());
 			assertEquals(1,od.GetTarget());
 			assertEquals(false,od.GetservicesFloors()[0]);
 			assertEquals(1,od.GetElevatordoorstatus());
