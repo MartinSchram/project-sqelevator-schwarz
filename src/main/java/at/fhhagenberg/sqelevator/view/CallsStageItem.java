@@ -52,7 +52,7 @@ public class CallsStageItem  extends AnchorPane {
 
     }
 
-    public void setArrowActive(ArrowTypes arrType){
+    public void SetArrowActive(ArrowTypes arrType){
 
         switch (arrType){
             case eUP:
@@ -65,7 +65,7 @@ public class CallsStageItem  extends AnchorPane {
         }
     }
 
-    public void setArrowInactive(ArrowTypes arrType){
+    public void SetArrowInactive(ArrowTypes arrType){
 
         switch (arrType){
             case eUP:

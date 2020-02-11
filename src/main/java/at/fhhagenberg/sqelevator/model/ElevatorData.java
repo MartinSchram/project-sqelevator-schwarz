@@ -56,7 +56,7 @@ public class ElevatorData implements Cloneable {
 	 * 
 	 * @return current elevatorNumber
 	 */
-	public int getElevatornumber() {
+	public int GetElevatornumber() {
 		return this.elevatorNumber;
 	}
 
@@ -65,7 +65,7 @@ public class ElevatorData implements Cloneable {
 	 * 
 	 * @return current elevatorAccel
 	 */
-	public int getElevatoraccel() {
+	public int GetElevatoraccel() {
 		return this.elevatorAccel;
 	}
 
@@ -74,7 +74,7 @@ public class ElevatorData implements Cloneable {
 	 * 
 	 * @return current elevatorDoorStatus
 	 */
-	public int getElevatordoorstatus() {
+	public int GetElevatordoorstatus() {
 		return this.elevatorDoorStatus;
 	}
 
@@ -83,7 +83,7 @@ public class ElevatorData implements Cloneable {
 	 * 
 	 * @return current elevatorFloor
 	 */
-	public int getElevatorfloor() {
+	public int GetElevatorfloor() {
 		return this.elevatorFloor;
 	}
 
@@ -92,7 +92,7 @@ public class ElevatorData implements Cloneable {
 	 * 
 	 * @return current elevatorPosition
 	 */
-	public int getElevatorposition() {
+	public int GetElevatorposition() {
 		return this.elevatorPosition;
 	}
 
@@ -101,7 +101,7 @@ public class ElevatorData implements Cloneable {
 	 * 
 	 * @return current elevatorSpeed
 	 */
-	public int getElevatorspeed() {
+	public int GetElevatorspeed() {
 		return this.elevatorSpeed;
 	}
 
@@ -110,7 +110,7 @@ public class ElevatorData implements Cloneable {
 	 * 
 	 * @return current elevatorWeight
 	 */
-	public int getElevatorweight() {
+	public int GetElevatorweight() {
 		return this.elevatorWeight;
 	}
 
@@ -119,7 +119,7 @@ public class ElevatorData implements Cloneable {
 	 * 
 	 * @return current target
 	 */
-	public int getTarget() {
+	public int GetTarget() {
 		return this.target;
 	}
 
@@ -129,7 +129,7 @@ public class ElevatorData implements Cloneable {
 	 * 
 	 * @return FALSE -> when commited dir is down
 	 */
-	public boolean getCommittedDirIsUp() {
+	public boolean GetCommittedDirIsUp() {
 		return this.committedDirIsUp;
 	}
 
@@ -138,7 +138,7 @@ public class ElevatorData implements Cloneable {
 	 * 
 	 * @return [] where TRUE -> floor idx pressed
 	 */
-	public boolean[] getElevatorButtons() {
+	public boolean[] GetElevatorButtons() {
 		return this.elevatorButtons;
 	}
 
@@ -147,7 +147,7 @@ public class ElevatorData implements Cloneable {
 	 * 
 	 * @return [] where TRUE -> floor at idx is serviced
 	 */
-	public boolean[] getservicesFloors() {
+	public boolean[] GetservicesFloors() {
 		return this.servicesFloors;
 	}
 
@@ -158,7 +158,7 @@ public class ElevatorData implements Cloneable {
 	 * 
 	 * @param val to be set
 	 */
-	public void setElevatornumber(int val) {
+	public void SetElevatornumber(int val) {
 		this.elevatorNumber = val;
 	}
 
@@ -167,7 +167,7 @@ public class ElevatorData implements Cloneable {
 	 * 
 	 * @param val to be set
 	 */
-	public void setElevatoraccel(int val) {
+	public void SetElevatoraccel(int val) {
 		this.elevatorAccel = val;
 	}
 
@@ -176,7 +176,7 @@ public class ElevatorData implements Cloneable {
 	 * 
 	 * @param val to be set
 	 */
-	public void setElevatordoorstatus(int val) {
+	public void SetElevatordoorstatus(int val) {
 		this.elevatorDoorStatus = val;
 	}
 
@@ -185,7 +185,7 @@ public class ElevatorData implements Cloneable {
 	 * 
 	 * @param val to be set
 	 */
-	public void setElevatorfloor(int val) {
+	public void SetElevatorfloor(int val) {
 		this.elevatorFloor = val;
 	}
 
@@ -194,7 +194,7 @@ public class ElevatorData implements Cloneable {
 	 * 
 	 * @param val to be set
 	 */
-	public void setElevatorposition(int val) {
+	public void SetElevatorposition(int val) {
 		this.elevatorPosition = val;
 	}
 
@@ -203,7 +203,7 @@ public class ElevatorData implements Cloneable {
 	 * 
 	 * @param val to be set
 	 */
-	public void setElevatorspeed(int val) {
+	public void SetElevatorspeed(int val) {
 		this.elevatorSpeed = val;
 	}
 
@@ -212,7 +212,7 @@ public class ElevatorData implements Cloneable {
 	 * 
 	 * @param val to be set
 	 */
-	public void setElevatorweight(int val) {
+	public void SetElevatorweight(int val) {
 		this.elevatorWeight = val;
 	}
 
@@ -221,11 +221,11 @@ public class ElevatorData implements Cloneable {
 	 * 
 	 * @param val to be set
 	 */
-	public void setTarget(int val) {
+	public void SetTarget(int val) {
 		this.target = val;
 	}
 
-	public void setCommitedDirIsUp(boolean is) {
+	public void SetCommitedDirIsUp(boolean is) {
 		this.committedDirIsUp = is;
 	}
 
@@ -236,7 +236,7 @@ public class ElevatorData implements Cloneable {
 	 * @param fl floor to be set to serviced.
 	 * @throws IllegalArgumentException on non existing floors
 	 */
-	public void setFloorIsServiced(int fl, boolean is) {
+	public void SetFloorIsServiced(int fl, boolean is) {
 		if (fl >= servicesFloors.length || fl < 0) {
 			throw new IllegalArgumentException("The floor number does not exist");
 		} else {
@@ -250,7 +250,7 @@ public class ElevatorData implements Cloneable {
 	 * @param areServiced TRUE-> all floors will be set to serviced, FALSE -> all
 	 *                    floors unserviced.
 	 */
-	public void setAllFloorsUnOrServiced(boolean areServiced) {
+	public void SetAllFloorsUnOrServiced(boolean areServiced) {
 		for (int i = 0; i < servicesFloors.length; i++) {
 			this.servicesFloors[i] = areServiced;
 		}
@@ -262,7 +262,7 @@ public class ElevatorData implements Cloneable {
 	 * @param fl floor where its button will be enabled.
 	 * @throws IllegalArgumentException on non existing floors
 	 */
-	public void setElevatorButtonAtFloorEnabled(int fl, boolean is) {
+	public void SetElevatorButtonAtFloorEnabled(int fl, boolean is) {
 		if (fl >= elevatorButtons.length || fl < 0) {
 			throw new IllegalArgumentException("The floor number does not exist");
 		} else {

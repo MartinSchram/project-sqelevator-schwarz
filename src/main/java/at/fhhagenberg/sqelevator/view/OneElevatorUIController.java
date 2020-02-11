@@ -65,7 +65,7 @@ public class OneElevatorUIController extends AnchorPane {
     @FXML
     private VBox StagesVBox;
 
-    public int countStages = 0;
+    public int CountStages = 0;
     private Image elevCloseDoorImg;
     private Image elevOpenDoorImg;
 
@@ -118,14 +118,14 @@ public class OneElevatorUIController extends AnchorPane {
 //        SetElevatorDirection(ElevatorDir.eDown);
 
         tbtnStatusManual.setSelected(true);
-        setOpCurrentOpMode(OperationModes.eMANUAL);
+        SetOpCurrentOpMode(OperationModes.eMANUAL);
 
-        initilizeElevator(Stages, ElevatorName);
+        InitilizeElevator(Stages, ElevatorName);
 
         oneElevAction=new ElevatorActions();
-        oneElevAction.servicesFloors=new boolean[mCountStages];
+        oneElevAction.ServicesFloors=new boolean[mCountStages];
         for(int i=0;i<mCountStages;i++){
-            oneElevAction.servicesFloors[i]=true;
+            oneElevAction.ServicesFloors[i]=true;
         }
 
     }
@@ -138,9 +138,9 @@ public class OneElevatorUIController extends AnchorPane {
      * @param elevatorName Elevator Name
      * @throws InvalidParameterException Throws an Exception when CountStages==0 or elevatorName==""
      */
-    private void initilizeElevator(int CountStages, String elevatorName) throws InvalidParameterException {
+    private void InitilizeElevator(int CountStages, String elevatorName) throws InvalidParameterException {
 
-        if (CountStages > 0 && !(elevatorName.equals(""))) { 
+        if (CountStages > 0 && elevatorName != "") {
             mCountStages = CountStages;
             lblElevatorName.setText(elevatorName);
             for (int i = 0; i < CountStages; i++) {
@@ -149,7 +149,7 @@ public class OneElevatorUIController extends AnchorPane {
                 ToggleButton ToggleBtn=new ToggleButton();
                 ToggleBtn.setPrefWidth(50);
                 ToggleBtn.setText(Integer.toString(i+1));
-                ToggleBtn.setOnAction(stageButtonEventHandler);
+                ToggleBtn.setOnAction(StageButtonEventHandler);
 
                 ImageView img=new ImageView();
                 img.setImage(elevStageEmpty);
@@ -171,7 +171,7 @@ public class OneElevatorUIController extends AnchorPane {
 
 
     // Creating the mouse event handler
-    EventHandler<ActionEvent> stageButtonEventHandler = new EventHandler<ActionEvent>() {
+    EventHandler<ActionEvent> StageButtonEventHandler = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent e) {
 
@@ -186,7 +186,7 @@ public class OneElevatorUIController extends AnchorPane {
                     m_StagesList.get(i).setSelected(false);
                 }
             }
-            oneElevAction.targetFl=numberStagePressed-1;
+            oneElevAction.TargetFl=numberStagePressed-1;
         }
     };
 
@@ -211,20 +211,20 @@ public class OneElevatorUIController extends AnchorPane {
     void onBtnPressedHandle(ActionEvent event) {
 
         if(event.getTarget().equals(tbtnStatusAutomatic)){
-            if(!oneElevAction.autoMode) {
-                oneElevAction.autoMode = true;
+            if(!oneElevAction.AutoMode) {
+                oneElevAction.AutoMode = true;
                 tbtnStatusManual.setSelected(false);
-                setOpCurrentOpMode(OperationModes.eAUTO);
+                SetOpCurrentOpMode(OperationModes.eAUTO);
             }
             else{
                 tbtnStatusAutomatic.setSelected(true);
             }
         }
         else{
-            if(oneElevAction.autoMode) {
-                oneElevAction.autoMode = false;
+            if(oneElevAction.AutoMode) {
+                oneElevAction.AutoMode = false;
                 tbtnStatusAutomatic.setSelected(false);
-                setOpCurrentOpMode(OperationModes.eMANUAL);
+                SetOpCurrentOpMode(OperationModes.eMANUAL);
             }
             else {
                 tbtnStatusManual.setSelected(true);
@@ -233,7 +233,7 @@ public class OneElevatorUIController extends AnchorPane {
 
     }
 
-    public void setElevatorCurrentState(int currState){
+    public void SetElevatorCurrentState(int currState){
 
         for(int i=0;i<mCountStages;i++){
             if(i==currState){
@@ -251,7 +251,7 @@ public class OneElevatorUIController extends AnchorPane {
      * @param DirectionToShow State of the Doors
      * @throws InvalidParameterException when Method Parameter is not a value defined in ElevatorDir enum
      */
-    public void setElevatorDirection(ElevatorDir DirectionToShow) throws InvalidParameterException {
+    public void SetElevatorDirection(ElevatorDir DirectionToShow) throws InvalidParameterException {
 
         switch (DirectionToShow) {
             case eUp:
@@ -271,7 +271,7 @@ public class OneElevatorUIController extends AnchorPane {
      * @param modeToSet Operation Mode use the defined enum OperationModes
      * @throws InvalidParameterException when Method Parameter is not a value defined in OperationMode enum
      */
-    public void setOpCurrentOpMode(OperationModes modeToSet) throws InvalidParameterException {
+    public void SetOpCurrentOpMode(OperationModes modeToSet) throws InvalidParameterException {
 
         switch (modeToSet) {
             case eAUTO:
@@ -292,7 +292,7 @@ public class OneElevatorUIController extends AnchorPane {
      * @param StateToSet Operation Mode use the defined enum DoorsState
      * @throws InvalidParameterException when Method Parameter is not a value defined in DoorsState enum
      */
-    public void setDoorState(DoorsState StateToSet) throws InvalidParameterException {
+    public void SetDoorState(DoorsState StateToSet) throws InvalidParameterException {
 
         switch (StateToSet) {
             case eClosen:
@@ -313,7 +313,7 @@ public class OneElevatorUIController extends AnchorPane {
      * @param PayLoadToSet Value of the Payload for showing
      * @throws InvalidParameterException PayLoadToSet is invalid when value is <0
      */
-    public void setPayloadLabel(int PayLoadToSet) throws InvalidParameterException {
+    public void SetPayloadLabel(int PayLoadToSet) throws InvalidParameterException {
 
         if(PayLoadToSet >= 0){
             lblPayload.setText(Integer.toString(PayLoadToSet));
@@ -331,7 +331,7 @@ public class OneElevatorUIController extends AnchorPane {
      *
      * @param VelocityToSet Sets the value of the
      */
-    public void setVelocity(int VelocityToSet) {
+    public void SetVelocity(int VelocityToSet) {
 
         lblVelocity.setText(Integer.toString(VelocityToSet));
 

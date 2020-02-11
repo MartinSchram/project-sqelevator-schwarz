@@ -38,23 +38,23 @@ class ElevatorControllerIntegrationTest implements Observer {
 	@BeforeEach
 	void setUp() throws Exception {
 		ev = new ElevatorController();
-		ev.setInst(iMock);
-		ev.setElevatorCount(1);
-		ev.setFloorCount(4);
+		ev.SetInst(iMock);
+		ev.SetElevatorCount(1);
+		ev.SetFloorCount(4);
 		ev.addObserver(uiMock);
-		ev.switchOn();
+		ev.SwitchOn();
 		recv = 0;
 	}
 
 	@Test
 	void ControllerDataForwardTest() {
 		ev.addObserver(uiMock);
-		ev.switchOn();
+		ev.SwitchOn();
 		ElevatorActions ea = new ElevatorActions(2, true, false, new boolean[] { true, true, true, true });
-		ev.guiActions = new ElevatorActions[] { ea };
+		ev.GuiActions = new ElevatorActions[] { ea };
 
 		try {
-			ev.runCycle();
+			ev.RunCycle();
 
 			assertEquals(1, Mockito.mockingDetails(uiMock).getInvocations().size());
 
@@ -67,21 +67,21 @@ class ElevatorControllerIntegrationTest implements Observer {
 	void ControllerUpdateDataVerificationTest() {
 
 		ev.addObserver(this);
-		ev.switchOn();
+		ev.SwitchOn();
 		ElevatorActions ea = new ElevatorActions(2, true, false, new boolean[] { true, true, true, true });
-		ev.guiActions = new ElevatorActions[] { ea };
+		ev.GuiActions = new ElevatorActions[] { ea };
 		ElevatorData r = new ElevatorData(0, 2);
 		Building b = new Building(4, iMock);
 		
-		r.setElevatorButtonAtFloorEnabled(0, true);
-		r.setElevatornumber(0);
-		r.setElevatoraccel(2);
-		r.setElevatorspeed(200);
-		r.setElevatordoorstatus(2);
-		r.setElevatorfloor(2);
-		r.setElevatorposition(2);
-		r.setElevatorweight(100);
-		r.setTarget(1);
+		r.SetElevatorButtonAtFloorEnabled(0, true);
+		r.SetElevatornumber(0);
+		r.SetElevatoraccel(2);
+		r.SetElevatorspeed(200);
+		r.SetElevatordoorstatus(2);
+		r.SetElevatorfloor(2);
+		r.SetElevatorposition(2);
+		r.SetElevatorweight(100);
+		r.SetTarget(1);
 
 		try {
 			Mockito.when(iMock.getTarget(0)).thenReturn(1);
@@ -94,20 +94,20 @@ class ElevatorControllerIntegrationTest implements Observer {
 			Mockito.when(iMock.getElevatorButton(0, 0)).thenReturn(true);
 			Mockito.when(iMock.getElevatorAccel(0)).thenReturn(2);
 
-			ev.runCycle();
+			ev.RunCycle();
 
 			
 			assertEquals(1, this.recv);
 			
-			assertEquals(1,od.getTarget());
-			assertEquals(false,od.getservicesFloors()[0]);
-			assertEquals(1,od.getElevatordoorstatus());
-			assertEquals(2,od.getElevatorfloor());
-			assertEquals(2,od.getElevatorposition());
-			assertEquals(200, od.getElevatorspeed());
-			assertEquals(100, od.getElevatorweight());
-			assertEquals(true,od.getElevatorButtons()[0]);
-			assertEquals(2,od.getElevatoraccel());
+			assertEquals(1,od.GetTarget());
+			assertEquals(false,od.GetservicesFloors()[0]);
+			assertEquals(1,od.GetElevatordoorstatus());
+			assertEquals(2,od.GetElevatorfloor());
+			assertEquals(2,od.GetElevatorposition());
+			assertEquals(200, od.GetElevatorspeed());
+			assertEquals(100, od.GetElevatorweight());
+			assertEquals(true,od.GetElevatorButtons()[0]);
+			assertEquals(2,od.GetElevatoraccel());
 			
 
 		} catch (RemoteException | CloneNotSupportedException | InterruptedException e) {
@@ -119,7 +119,7 @@ class ElevatorControllerIntegrationTest implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		SystemData t = (SystemData) arg1;
-		this.od =t.getElevatorData()[0];
+		this.od =t.GetElevatorData()[0];
 		recv++;
 	}
 

@@ -22,18 +22,19 @@ public class ElevatorController extends Observable {
 	private int elevatorCount;
 	private Elevator[] elevators;
 	private Building building;
+	private ElevatorScheduler scheduler;
 	private ElevatorUI uIController;
 	private SystemData observerdata;
 
 	/**
 	 * Backend interfce binded to gui
 	 */
-	public IElevator backEnd;
+	public IElevator BackEnd;
 
 	/**
 	 * Binding interface to the gui
 	 */
-	public ElevatorActions[] guiActions;
+	public ElevatorActions[] GuiActions;
 
 	/**
 	 * default ctor of controller
@@ -42,9 +43,9 @@ public class ElevatorController extends Observable {
 
 	}
 
-	public ElevatorController(ElevatorUI uiController) {
-		this.addObserver(uiController);
-		uIController = uiController;
+	public ElevatorController(ElevatorUI UIController) {
+		this.addObserver(UIController);
+		uIController = UIController;
 	}
 
 	/**
@@ -57,7 +58,7 @@ public class ElevatorController extends Observable {
 	public ElevatorController(int pelevs, int pfl, IElevator inst) {
 		this.elevatorCount = pelevs;
 		this.floors = pfl;
-		this.backEnd = inst;
+		this.BackEnd = inst;
 	}
 
 	/**
@@ -65,9 +66,9 @@ public class ElevatorController extends Observable {
 	 * 
 	 * @return successfully attached
 	 */
-	public boolean connectRMI() {
+	public boolean ConnectRMI() {
 		try {
-			this.backEnd = (IElevator) Naming.lookup("rmi://localhost/ElevatorSim");
+			this.BackEnd = (IElevator) Naming.lookup("rmi://localhost/ElevatorSim");
 			return true;
 		} catch (MalformedURLException | RemoteException | NotBoundException e) {
 			return false;
@@ -80,7 +81,7 @@ public class ElevatorController extends Observable {
 	 * 
 	 * @return TRUE -> switched on
 	 */
-	public boolean isOn() {
+	public boolean IsOn() {
 		return this.on;
 	}
 
@@ -89,9 +90,9 @@ public class ElevatorController extends Observable {
 	 * 
 	 * @return successfully attached
 	 */
-	public boolean setInst(IElevator inst) {
+	public boolean SetInst(IElevator inst) {
 		if (inst != null) {
-			this.backEnd = inst;
+			this.BackEnd = inst;
 			return true;
 		} else
 			return false;
@@ -102,7 +103,7 @@ public class ElevatorController extends Observable {
 	 * 
 	 * @param count number of elevators in building
 	 */
-	public void setElevatorCount(int count) {
+	public void SetElevatorCount(int count) {
 		this.elevatorCount = count;
 	}
 
@@ -111,7 +112,7 @@ public class ElevatorController extends Observable {
 	 * 
 	 * @param count number of floors in building
 	 */
-	public void setFloorCount(int count) {
+	public void SetFloorCount(int count) {
 		this.floors = count;
 	}
 
@@ -120,7 +121,7 @@ public class ElevatorController extends Observable {
 	 * 
 	 * @return TRUE -> successfully switched on
 	 */
-	public boolean switchOn() {
+	public boolean SwitchOn() {
 		this.on = init();
 		return this.on;
 	}
@@ -133,14 +134,14 @@ public class ElevatorController extends Observable {
 	 * @throws CloneNotSupportedException
 	 * @throws RemoteException            rmi interface hung up
 	 */
-	public SystemData getObserverData() throws CloneNotSupportedException, RemoteException {
-		this.observerdata.setBuildingButonDownData(building.getFloorButtonDownStates());
-		this.observerdata.setBuildingButonUpData(building.getFloorButtonUpStates());
+	public SystemData GetObserverData() throws CloneNotSupportedException, RemoteException {
+		this.observerdata.SetBuildingButonDownData(building.GetFloorButtonDownStates());
+		this.observerdata.SetBuildingButonUpData(building.GetFloorButtonUpStates());
 		ElevatorData[] ted = new ElevatorData[elevatorCount];
 		for (int i = 0; i < ted.length; i++) {
-			ted[i] = elevators[i].getData();
+			ted[i] = elevators[i].GetData();
 		}
-		this.observerdata.setElevatorData(ted);
+		this.observerdata.SetElevatorData(ted);
 		return this.observerdata;
 	}
 
@@ -149,7 +150,7 @@ public class ElevatorController extends Observable {
 	 * 
 	 * @return TRUE -> successfully switched on
 	 */
-	public void switchOff() {
+	public void SwitchOff() {
 		this.on = false;
 	}
 
@@ -160,22 +161,22 @@ public class ElevatorController extends Observable {
 	 * @return TRUE -> successfully initialized
 	 */
 	public boolean init() {
-		if (!this.on && getPropertiesFromBackend()) {
-			this.guiActions = new ElevatorActions[elevatorCount];
+		if (!this.on && GetPropertiesFromBackend()) {
+			this.GuiActions = new ElevatorActions[elevatorCount];
 			this.elevators = new Elevator[elevatorCount];
 			this.observerdata = new SystemData(elevatorCount);
 
 			try {
 				if (uIController != null) {
 					for (int i = 0; i < elevatorCount; i++) {
-						this.guiActions[i] = uIController.m_ElevatorVector.get(i).oneElevAction;
+						this.GuiActions[i] = uIController.m_ElevatorVector.get(i).oneElevAction;
 					}
 				}
 
 				for (int i = 0; i < elevators.length; i++) {
-					elevators[i] = new Elevator(i, floors, this.backEnd);
+					elevators[i] = new Elevator(i, floors, this.BackEnd);
 				}
-				this.building = new Building(floors, this.backEnd);
+				this.building = new Building(floors, this.BackEnd);
 				this.on = true;
 
 			} catch (Exception e) {
@@ -187,39 +188,39 @@ public class ElevatorController extends Observable {
 
 	}
 
-	public void runCyclic() {
+	public void RunCyclic() {
 		while (this.on) {
 			try {
-				runCycle();
-			} catch (Exception e) {
-				this.switchOff();
+				RunCycle();
+			} catch (RemoteException | CloneNotSupportedException | InterruptedException e) {
+				this.SwitchOff();
 			}
 		}
 	}
 
-	public void runCycle() throws RemoteException, CloneNotSupportedException, InterruptedException {
+	public void RunCycle() throws RemoteException, CloneNotSupportedException, InterruptedException {
 		if (this.on) {
 			for (Elevator e : elevators)
-				e.updateData();
-			building.update();
-			ElevatorScheduler.schedule(elevators, guiActions.clone(), building);
+				e.UpdateData();
+			building.Update();
+			ElevatorScheduler.Schedule(elevators, GuiActions.clone(), building);
 			for (Elevator e : elevators)
-				e.updateTarget();
-			Thread.sleep(building.getClockTick());
+				e.UpdateTarget();
+			Thread.sleep(building.GetClockTick());
 			for (Elevator e : elevators)
-				e.updateData();
+				e.UpdateData();
 			setChanged();
-			SystemData sd = getObserverData();
+			SystemData sd = GetObserverData();
 			notifyObservers(sd);
 		}
 	}
 
-	private boolean getPropertiesFromBackend() {
-		if(this.backEnd == null) return false;
+	private boolean GetPropertiesFromBackend() {
+		if(this.BackEnd == null) return false;
 		if (this.floors == 0 || this.elevatorCount == 0) {
 			try {
-				setElevatorCount(backEnd.getElevatorNum());
-				setFloorCount(backEnd.getFloorNum());
+				SetElevatorCount(BackEnd.getElevatorNum());
+				SetFloorCount(BackEnd.getFloorNum());
 				return true;
 			} catch (RemoteException e) {
 				return false;

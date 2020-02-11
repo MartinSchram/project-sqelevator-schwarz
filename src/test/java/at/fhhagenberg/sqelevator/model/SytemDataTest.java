@@ -9,24 +9,24 @@ class SytemDataTest {
 	@Test
 	void ElevatordataContentTest() {
 		SystemData sd = new SystemData(3);
-		sd.setElevatorData(new ElevatorData[] {new ElevatorData(0,3), new ElevatorData(0,3)});
+		sd.SetElevatorData(new ElevatorData[] {new ElevatorData(0,3), new ElevatorData(0,3)});
 
-		assertNotNull(sd.getElevatorData());
+		assertNotNull(sd.GetElevatorData());
 	}
 	
 	@Test
 	void BuildingdataUpContentTest() {
 		SystemData sd = new SystemData(3);
-		sd.setBuildingButonUpData(new BuildingData(3));
+		sd.SetBuildingButonUpData(new BuildingData(3));
 
-		assertNotNull(sd.getBuildingButtonUpData());
+		assertNotNull(sd.GetBuildingButtonUpData());
 	}
 
 	@Test
 	void BuildingdataDownContentTest() {
 		SystemData sd = new SystemData(3);
-		sd.setBuildingButonDownData(new BuildingData(3));
+		sd.SetBuildingButonDownData(new BuildingData(3));
 
-		assertNotNull(sd.getBuildingButtonDownData());
+		assertNotNull(sd.GetBuildingButtonDownData());
 	}
 }

@@ -28,7 +28,7 @@ public class ElevatorUI implements Initializable, Observer {
 //    public Vector<OneElevatorUIController> m_ElevatorVector;
 
 
-	private int countElevatorStages;
+	private int CountElevatorStages;
 
     private CallsControll m_ViewCallsCtrl;
     private StatusControll m_ViewStatusCtrl;
@@ -46,7 +46,7 @@ public class ElevatorUI implements Initializable, Observer {
      * @param CountStages
      * @throws InvalidParameterException
      */
-    public void setupUi(int CountElevators, int CountStages) throws InvalidParameterException{
+    public void SetupUi(int CountElevators, int CountStages) throws InvalidParameterException{
 
 	    if(CountElevators>0 && CountStages>0){
             for(int i=0;i<CountElevators;i++){
@@ -57,7 +57,7 @@ public class ElevatorUI implements Initializable, Observer {
                 flowPaneContainer.getChildren().add(elem);
             }
 
-            countElevatorStages=CountStages;
+            CountElevatorStages=CountStages;
 
             m_ViewCallsCtrl=new CallsControll(CountStages);
             m_ViewStatusCtrl=new StatusControll();
@@ -76,10 +76,10 @@ public class ElevatorUI implements Initializable, Observer {
      * @param Payload Payload to Set
      * @throws IndexOutOfBoundsException
      */
-    public void setPayload(int ElevNum,int Payload) throws IndexOutOfBoundsException {
+    public void SetPayload(int ElevNum,int Payload) throws IndexOutOfBoundsException {
 
-	    if (ElevNum < countElevatorStages || ElevNum > countElevatorStages){
-            m_ElevatorVector.get(ElevNum).setPayloadLabel(Payload);
+	    if (ElevNum < CountElevatorStages || ElevNum > CountElevatorStages){
+            m_ElevatorVector.get(ElevNum).SetPayloadLabel(Payload);
         }
 	    else{
 	        throw new IndexOutOfBoundsException("Elevator Number is not in Range");
@@ -91,10 +91,10 @@ public class ElevatorUI implements Initializable, Observer {
      * @param SpeedValue Speed to Set
      * @throws IndexOutOfBoundsException
      */
-    public void setSpeed(int ElevNum,int SpeedValue) throws IndexOutOfBoundsException {
+    public void SetSpeed(int ElevNum,int SpeedValue) throws IndexOutOfBoundsException {
 
-        if (ElevNum < countElevatorStages || ElevNum > countElevatorStages){
-            m_ElevatorVector.get(ElevNum).setVelocity(SpeedValue);
+        if (ElevNum < CountElevatorStages || ElevNum > CountElevatorStages){
+            m_ElevatorVector.get(ElevNum).SetVelocity(SpeedValue);
         }
         else{
             throw new IndexOutOfBoundsException("Elevator Number is not in Range");
@@ -103,52 +103,52 @@ public class ElevatorUI implements Initializable, Observer {
 
 
 
-    private void setStageCalls(BuildingData StageDownCalls,BuildingData StageUpCalls){
+    private void SetStageCalls(BuildingData StageDownCalls,BuildingData StageUpCalls){
 
-        for(int i = 0;i<countElevatorStages;i++){
-            m_ViewCallsCtrl.setStageDown(i+1,StageDownCalls.getStatus(i));
-            m_ViewCallsCtrl.setStageUp(i+1,StageUpCalls.getStatus(i));
+        for(int i = 0;i<CountElevatorStages;i++){
+            m_ViewCallsCtrl.SetStageDown(i+1,StageDownCalls.GetStatus(i));
+            m_ViewCallsCtrl.SetStageUp(i+1,StageUpCalls.GetStatus(i));
         }
 
 
     }
 
-    private void setElevatorDoorState(int ElevNum,int DoorStatus){
+    private void SetElevatorDoorState(int ElevNum,int DoorStatus){
         if(DoorStatus==1){
-            m_ElevatorVector.get(ElevNum).setDoorState(OneElevatorUIController.DoorsState.eOpen);
+            m_ElevatorVector.get(ElevNum).SetDoorState(OneElevatorUIController.DoorsState.eOpen);
         }
         else{
-            m_ElevatorVector.get(ElevNum).setDoorState(OneElevatorUIController.DoorsState.eClosen);
+            m_ElevatorVector.get(ElevNum).SetDoorState(OneElevatorUIController.DoorsState.eClosen);
         }
 
     }
 
-    private void setElevatorDirection(int ElevNum,boolean DirectionUp){
+    private void SetElevatorDirection(int ElevNum,boolean DirectionUp){
 
         if(DirectionUp){
-            m_ElevatorVector.get(ElevNum).setElevatorDirection(OneElevatorUIController.ElevatorDir.eUp);
+            m_ElevatorVector.get(ElevNum).SetElevatorDirection(OneElevatorUIController.ElevatorDir.eUp);
         }
         else{
-            m_ElevatorVector.get(ElevNum).setElevatorDirection(OneElevatorUIController.ElevatorDir.eDown);
+            m_ElevatorVector.get(ElevNum).SetElevatorDirection(OneElevatorUIController.ElevatorDir.eDown);
         }
 
     }
 
-    private void setElevatorCurrFloor(int ElevNum,int StageNum){
-        m_ElevatorVector.get(ElevNum).setElevatorCurrentState(StageNum);
+    private void SetElevatorCurrFloor(int ElevNum,int StageNum){
+        m_ElevatorVector.get(ElevNum).SetElevatorCurrentState(StageNum);
     }
 
-    private void updateElevators(ElevatorData[] elevatorData){
+    private void UpdateElevators(ElevatorData[] elevatorData){
 
         for (var elem:  elevatorData) {
-            int ElevNumber=elem.getElevatornumber();
-            setPayload(ElevNumber,elem.getElevatorweight());
-            setSpeed(ElevNumber,elem.getElevatorspeed());
+            int ElevNumber=elem.GetElevatornumber();
+            SetPayload(ElevNumber,elem.GetElevatorweight());
+            SetSpeed(ElevNumber,elem.GetElevatorspeed());
 
-            int DoorStatus=elem.getElevatordoorstatus();
-            setElevatorDoorState(ElevNumber,DoorStatus);
-            setElevatorDirection(ElevNumber,elem.getCommittedDirIsUp());
-            setElevatorCurrFloor(ElevNumber,elem.getElevatorfloor());
+            int DoorStatus=elem.GetElevatordoorstatus();
+            SetElevatorDoorState(ElevNumber,DoorStatus);
+            SetElevatorDirection(ElevNumber,elem.GetCommittedDirIsUp());
+            SetElevatorCurrFloor(ElevNumber,elem.GetElevatorfloor());
 //            if(elem.GetCommittedDirIsUp()){
 //                m_ElevatorVector.get(ElevNumber).SetElevatorDirection(OneElevatorUIController.ElevatorDir.eUp);
 //            }
@@ -167,14 +167,14 @@ public class ElevatorUI implements Initializable, Observer {
 
         Platform.runLater(new Runnable() {
             public void run() {
-                updateElevators(Data.getElevatorData());
+                UpdateElevators(Data.GetElevatorData());
 
             }
         });
 
 
 
-        setStageCalls(Data.getBuildingButtonDownData(),Data.getBuildingButtonUpData());
+        SetStageCalls(Data.GetBuildingButtonDownData(),Data.GetBuildingButtonUpData());
 
     }
 

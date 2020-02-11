@@ -2,8 +2,10 @@ package at.fhhagenberg.sqelevator;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.rmi.Naming;
 
 import at.fhhagenberg.sqelevator.controller.ElevatorController;
+import at.fhhagenberg.sqelevator.model.Elevator;
 import at.fhhagenberg.sqelevator.view.ElevatorUI;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +17,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
+import sqelevator.IElevator;
 
 public class MainAppClass extends Application {
 
@@ -31,16 +34,17 @@ public class MainAppClass extends Application {
 	private static ElevatorUI m_UiController;
 	private static ElevatorController m_ElevatorConnectionController;
 
-	private static Thread pollingThread;
+	private static Thread PollingThread;
 
-	public Runnable runnable = () -> 
-		m_ElevatorConnectionController.runCyclic();
-	
+	public Runnable runnable = () -> {
+		m_ElevatorConnectionController.RunCyclic();
+	};
 
 
 
 	@Override
 	public void start(Stage stage) throws Exception {
+		// TODO Auto-generated method stub
 		try {
 
 			// initializing Ui
@@ -51,17 +55,18 @@ public class MainAppClass extends Application {
 
 			// Elevator Controller
 			m_ElevatorConnectionController=new ElevatorController(m_UiController);
-			m_ElevatorConnectionController.connectRMI();
-			int floorCount=  m_ElevatorConnectionController.backEnd.getFloorNum();
-			int elevatorCount= m_ElevatorConnectionController.backEnd.getElevatorNum();
+			m_ElevatorConnectionController.ConnectRMI();
+			int FloorCount=  m_ElevatorConnectionController.BackEnd.getFloorNum();
+			int ElevatorCount= m_ElevatorConnectionController.BackEnd.getElevatorNum();
 
 			// setup Ui with the count of Elevator and Floor count
-			m_UiController.setupUi(elevatorCount,floorCount);
-
-			m_ElevatorConnectionController.switchOn();
-			pollingThread = new Thread(runnable);
-			pollingThread.start();
-
+			m_UiController.SetupUi(ElevatorCount,FloorCount);
+//			m_ElevatorConnectionController.addObserver(m_UiController);
+			m_ElevatorConnectionController.SwitchOn();
+			PollingThread = new Thread(runnable);
+			PollingThread.start();
+//			m_ElevatorConnectionController.RunCyclic();
+//			m_UiController.SetPayload(0,100);
 
 			stage.setTitle("ControllerUI");
 			stage.setScene(new Scene(myPane, myPane.getWidth(), myPane.getHeight()));

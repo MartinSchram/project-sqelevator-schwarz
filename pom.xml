@@ -68,7 +68,7 @@
 				<version>0.0.3</version>
 				<configuration>
 					<launcher>launcher</launcher>
-					<mainClass>at.fhhagenberg.sqelevator.ElevatorUIApp</mainClass>
+					<mainClass>at.fhhagenberg.sqelevator.MainAppClass</mainClass>
 				</configuration>
 			</plugin>
 			<plugin>

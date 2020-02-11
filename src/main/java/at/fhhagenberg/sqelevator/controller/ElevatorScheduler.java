@@ -21,12 +21,12 @@ public class ElevatorScheduler {
 	 * @throws RemoteException 
 	 * @throws CloneNotSupportedException 
 	 */
-	public static void schedule(Elevator[] elevators, ElevatorActions[] guiactions, Building building) throws RemoteException, CloneNotSupportedException {
+	public static void Schedule(Elevator[] elevators, ElevatorActions[] guiactions, Building building) throws RemoteException, CloneNotSupportedException {
 		for (int i = 0; i < elevators.length; i++) 
-			if (!guiactions[i].autoMode)
-				elevators[i].setActions(guiactions[i]);
-		if(building.stateChanged())
-			scheduleTargets(elevators,guiactions,building);		
+			if (!guiactions[i].AutoMode)
+				elevators[i].SetActions(guiactions[i]);
+		if(building.StateChanged())
+			ScheduleTargets(elevators,guiactions,building);		
 	}
 
 	/**
@@ -35,13 +35,13 @@ public class ElevatorScheduler {
 	 * @param guiactions actions set from gui
 	 * @throws CloneNotSupportedException 
 	 */
-	private static void scheduleTargets(Elevator[] elevators,ElevatorActions[] guiactions, Building building) throws CloneNotSupportedException{
+	private static void ScheduleTargets(Elevator[] elevators,ElevatorActions[] guiactions, Building building) throws CloneNotSupportedException{
 		for(int i=0;i<elevators.length;i++) {
-			if(guiactions[i].autoMode) {
-				BuildingData bd=building.getFloorButtonDownStates();
-				BuildingData bu=building.getFloorButtonUpStates();
+			if(guiactions[i].AutoMode) {
+				BuildingData bd=building.GetFloorButtonDownStates();
+				BuildingData bu=building.GetFloorButtonUpStates();
 				// TODO insert logic
-				elevators[i].setActions(new ElevatorActions(i,true, true, elevators[i].getServicedFloors()));
+				elevators[i].SetActions(new ElevatorActions(i,true, true, elevators[i].GetServicedFloors()));
 			}
 		}
 	}

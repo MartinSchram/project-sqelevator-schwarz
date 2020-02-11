@@ -41,7 +41,7 @@ public class Building {
 	 * @return current clock tick
 	 * @throws RemoteException
 	 */
-	public long getClockTick() throws RemoteException {
+	public long GetClockTick() throws RemoteException {
 		return this.inst.getClockTick();
 	}
 
@@ -52,7 +52,7 @@ public class Building {
 	 * @return TRUE -> is active
 	 * @throws RemoteException rmi-interface hung up
 	 */
-	public boolean getFloorButtonUp(int floor) throws RemoteException {
+	public boolean GetFloorButtonUp(int floor) throws RemoteException {
 
 		if (floor >= floors || floor < 0) {
 			throw new IllegalArgumentException("The floor number does not exist");
@@ -69,7 +69,7 @@ public class Building {
 	 * @return TRUE -> is active
 	 * @throws RemoteException rmi-interface hung up
 	 */
-	public boolean getFloorButtonDown(int floor) throws RemoteException {
+	public boolean GetFloorButtonDown(int floor) throws RemoteException {
 
 		if (floor >= floors || floor < 0) {
 			throw new IllegalArgumentException("The floor number does not exist");
@@ -84,10 +84,10 @@ public class Building {
 	 * 
 	 * @throws RemoteException rmi-interface hung up
 	 */
-	public void update() throws RemoteException {
+	public void Update() throws RemoteException {
 		for (int i = 0; i < floors; i++) {
-			iStateButtonUp.setStatus(i, getFloorButtonUp(i));
-			iStateButtonDown.setStatus(i, getFloorButtonDown(i));
+			iStateButtonUp.SetStatus(i, GetFloorButtonUp(i));
+			iStateButtonDown.SetStatus(i, GetFloorButtonDown(i));
 		}
 	}
 
@@ -96,10 +96,10 @@ public class Building {
 	 * 
 	 * @throws RemoteException rmi-interface hung up
 	 */
-	public void storeState() throws RemoteException {
+	public void StoreState() throws RemoteException {
 		for (int i = 0; i < floors; i++) {
-			hStateButtonUp.setStatus(i,iStateButtonUp.getStatus(i));
-			hStateButtonDown.setStatus(i,iStateButtonDown.getStatus(i));
+			hStateButtonUp.SetStatus(i,iStateButtonUp.GetStatus(i));
+			hStateButtonDown.SetStatus(i,iStateButtonDown.GetStatus(i));
 		}
 	}
 
@@ -109,9 +109,9 @@ public class Building {
 	 * @return TRUE -> any state has changed
 	 * @throws RemoteException rmi-interface hung up
 	 */
-	public boolean stateChanged() throws RemoteException {
+	public boolean StateChanged() throws RemoteException {
 		for (int i = 0; i < floors; i++) {
-			if (iStateButtonUp.getStatus(i) != getFloorButtonUp(i) || iStateButtonDown.getStatus(i) != getFloorButtonDown(i))
+			if (iStateButtonUp.GetStatus(i) != GetFloorButtonUp(i) || iStateButtonDown.GetStatus(i) != GetFloorButtonDown(i))
 				return true;
 		}
 		return false;
@@ -124,7 +124,7 @@ public class Building {
 	 *         active
 	 * @throws CloneNotSupportedException
 	 */
-	public BuildingData getFloorButtonDownStates() throws CloneNotSupportedException {
+	public BuildingData GetFloorButtonDownStates() throws CloneNotSupportedException {
 		return this.iStateButtonDown;
 	}
 
@@ -135,7 +135,7 @@ public class Building {
 	 *         active
 	 * @throws CloneNotSupportedException
 	 */
-	public BuildingData getFloorButtonUpStates() throws CloneNotSupportedException {
+	public BuildingData GetFloorButtonUpStates() throws CloneNotSupportedException {
 		return this.iStateButtonUp;
 	}
 

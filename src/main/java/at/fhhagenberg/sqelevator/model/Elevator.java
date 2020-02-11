@@ -53,7 +53,7 @@ public class Elevator {
 		this.idx = pidx;
 		this.fl = pfl;
 		pdata = new ElevatorData(idx, pfl);
-		pdata.setAllFloorsUnOrServiced(true);
+		pdata.SetAllFloorsUnOrServiced(true);
 		paction = new ElevatorActions();
 	}
 
@@ -62,7 +62,7 @@ public class Elevator {
 	 * 
 	 * @param a array of actions from the gui
 	 */
-	public void setActions(ElevatorActions a) {
+	public void SetActions(ElevatorActions a) {
 		paction = a;
 	}
 	
@@ -74,19 +74,19 @@ public class Elevator {
 	 * @throws CloneNotSupportedException
 	 * @throws RemoteException            rmi interface hung up
 	 */
-	public ElevatorData getData() throws CloneNotSupportedException, RemoteException {
-		updateData();
+	public ElevatorData GetData() throws CloneNotSupportedException, RemoteException {
+		UpdateData();
 		return this.pdata.clone();
 	}
 	
 	
-	public boolean[] getServicedFloors() {
-		return this.pdata.getservicesFloors();
+	public boolean[] GetServicedFloors() {
+		return this.pdata.GetservicesFloors();
 	}
 
 	
-	public int getTarget() {
-		return this.pdata.getTarget();
+	public int GetTarget() {
+		return this.pdata.GetTarget();
 	}
 	
 	/**
@@ -94,20 +94,20 @@ public class Elevator {
 	 * 
 	 * @throws RemoteException rmi interface hung up
 	 */
-	public void updateData() throws RemoteException {
-		pdata.setElevatornumber(idx);
-		pdata.setElevatoraccel(inst.getElevatorAccel(idx));
-		pdata.setElevatordoorstatus(inst.getElevatorDoorStatus(idx));
-		pdata.setElevatorfloor(inst.getElevatorFloor(idx));
-		pdata.setElevatorposition(inst.getElevatorPosition(idx));
-		pdata.setElevatorspeed(inst.getElevatorSpeed(idx));
-		pdata.setElevatorweight(inst.getElevatorWeight(idx));
+	public void UpdateData() throws RemoteException {
+		pdata.SetElevatornumber(idx);
+		pdata.SetElevatoraccel(inst.getElevatorAccel(idx));
+		pdata.SetElevatordoorstatus(inst.getElevatorDoorStatus(idx));
+		pdata.SetElevatorfloor(inst.getElevatorFloor(idx));
+		pdata.SetElevatorposition(inst.getElevatorPosition(idx));
+		pdata.SetElevatorspeed(inst.getElevatorSpeed(idx));
+		pdata.SetElevatorweight(inst.getElevatorWeight(idx));
 		for (int i = 0; i < fl; i++) {
-			pdata.setFloorIsServiced(i, inst.getServicesFloors(idx, i));
-			pdata.setElevatorButtonAtFloorEnabled(i, inst.getElevatorButton(idx, i));
+			pdata.SetFloorIsServiced(i, inst.getServicesFloors(idx, i));
+			pdata.SetElevatorButtonAtFloorEnabled(i, inst.getElevatorButton(idx, i));
 		}
-		pdata.setTarget(inst.getTarget(idx));
-		pdata.setCommitedDirIsUp(pdata.getTarget() >pdata.getElevatorposition());
+		pdata.SetTarget(inst.getTarget(idx));
+		pdata.SetCommitedDirIsUp(pdata.GetTarget() >pdata.GetElevatorposition());
 
 	}
 	
@@ -116,10 +116,10 @@ public class Elevator {
 	 * Sets the new target floor
 	 * @throws RemoteException rmi interface hung up
 	 */
-	public void updateTarget() throws RemoteException {
-		inst.setTarget(idx, paction.targetFl);
-		for(int i =0;i<paction.servicesFloors.length;i++)
-			inst.setServicesFloors(idx, i, paction.servicesFloors[i]);
+	public void UpdateTarget() throws RemoteException {
+		inst.setTarget(idx, paction.TargetFl);
+		for(int i =0;i<paction.ServicesFloors.length;i++)
+			inst.setServicesFloors(idx, i, paction.ServicesFloors[i]);
 	}
 
 }
