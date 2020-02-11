@@ -12,7 +12,7 @@ class BuildingDataTest {
 		BuildingData ev = new BuildingData(3);
 		IllegalArgumentException thrown =
 		        assertThrows(IllegalArgumentException.class,
-		           () -> ev.SetStatus(3, true),
+		           () -> ev.setStatus(3, true),
 		           " expected floor number out of bounds!");
 
 		    assertTrue(thrown.getMessage().contains("The floor number does not exist"));
@@ -24,7 +24,7 @@ class BuildingDataTest {
 		BuildingData ev = new BuildingData(3);
 		IllegalArgumentException thrown =
 		        assertThrows(IllegalArgumentException.class,
-		           () -> ev.GetStatus(3),
+		           () -> ev.getStatus(3),
 		           " expected floor number out of bounds!");
 
 		    assertTrue(thrown.getMessage().contains("The floor number does not exist"));
@@ -35,7 +35,7 @@ class BuildingDataTest {
 		BuildingData ev = new BuildingData(3);
 		IllegalArgumentException thrown =
 		        assertThrows(IllegalArgumentException.class,
-		           () -> ev.SetStatus(-1, true),
+		           () -> ev.setStatus(-1, true),
 		           " expected floor number out of bounds!");
 
 		    assertTrue(thrown.getMessage().contains("The floor number does not exist"));
@@ -47,7 +47,7 @@ class BuildingDataTest {
 		BuildingData ev = new BuildingData(3);
 		IllegalArgumentException thrown =
 		        assertThrows(IllegalArgumentException.class,
-		           () -> ev.GetStatus(-1),
+		           () -> ev.getStatus(-1),
 		           " expected floor number out of bounds!");
 
 		    assertTrue(thrown.getMessage().contains("The floor number does not exist"));
@@ -56,9 +56,9 @@ class BuildingDataTest {
 	@Test
 	void testInBoundsGetSetFloorButtonPressed() {
 		BuildingData ev = new BuildingData(3);
-		ev.SetStatus(2, true);
+		ev.setStatus(2, true);
 		
-		assertEquals(true,ev.GetStatus(2));
-		assertEquals(false,ev.GetStatus(1));	
+		assertEquals(true,ev.getStatus(2));
+		assertEquals(false,ev.getStatus(1));	
 	}
 }

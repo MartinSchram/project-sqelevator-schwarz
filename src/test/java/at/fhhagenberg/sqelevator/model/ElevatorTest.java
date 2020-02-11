@@ -25,22 +25,22 @@ public class ElevatorTest {
 	void TestUpdateTarget() {
 		
 		Elevator e = new Elevator(0,2,iMock);
-		e.SetActions(new ElevatorActions(1,true,true,new boolean[] {true, false}));
+		e.setActions(new ElevatorActions(1,true,true,new boolean[] {true, false}));
 		
 		try {
 			Mockito.when(iMock.getTarget(0)).thenReturn(1);
 			Mockito.when(iMock.getServicesFloors(0,0)).thenReturn(false);
-			e.UpdateTarget();
-			e.UpdateData();
+			e.updateTarget();
+			e.updateData();
 		} catch (Exception ex) {
 			fail("Exception thrown at TestUpdateTarget: "+ ex.toString());
 		}
 		
 		
-		boolean[] ret = e.GetServicedFloors();
+		boolean[] ret = e.getServicedFloors();
 		
 		assertEquals(2,ret.length);
-		assertEquals(1,e.GetTarget());
+		assertEquals(1,e.getTarget());
 		assertEquals(ret[1],false);
 		
 	}
@@ -62,23 +62,23 @@ public class ElevatorTest {
 			Mockito.when(iMock.getElevatorButton(0,0)).thenReturn(true);
 			Mockito.when(iMock.getElevatorAccel(0)).thenReturn(2);
 			
-			r = e.GetData();
+			r = e.getData();
 
 		} catch (Exception ex) {
 			fail("Exception thrown at TestUpdateTarget: "+ ex.toString());
 		}
 		
 		
-		boolean[] eb= r.GetElevatorButtons();
+		boolean[] eb= r.getElevatorButtons();
 		
-		assertEquals(0,r.GetElevatornumber());
-		assertEquals(2,r.GetElevatoraccel());
-		assertEquals(200,r.GetElevatorspeed());
-		assertEquals(1,r.GetElevatordoorstatus());
-		assertEquals(2, r.GetElevatorfloor());
-		assertEquals(2,r.GetElevatorposition());
-		assertEquals(100, r.GetElevatorweight());
-		assertEquals(1,r.GetTarget());		
+		assertEquals(0,r.getElevatornumber());
+		assertEquals(2,r.getElevatoraccel());
+		assertEquals(200,r.getElevatorspeed());
+		assertEquals(1,r.getElevatordoorstatus());
+		assertEquals(2, r.getElevatorfloor());
+		assertEquals(2,r.getElevatorposition());
+		assertEquals(100, r.getElevatorweight());
+		assertEquals(1,r.getTarget());		
 		assertEquals(true, eb[0]);
 		assertEquals(false, eb[1]);
 		

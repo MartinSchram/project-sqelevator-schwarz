@@ -21,23 +21,23 @@ class ElevatorControllerUnitTest {
 	@Test
 	void ManualDestructTest() {
 		ElevatorController ev = new ElevatorController();
-		ev.SetInst(iMock);
+		ev.setInst(iMock);
 
-		ev.SwitchOn();
-		ev.SwitchOff();
+		ev.switchOn();
+		ev.switchOff();
 
-		assertEquals(false, ev.IsOn());
+		assertEquals(false, ev.isOn());
 		
 	}
 	
 	@Test
 	void ManualInitializationTest() {
 		ElevatorController ev = new ElevatorController();
-		ev.SetInst(iMock);
-		ev.SetElevatorCount(1);
-		ev.SetFloorCount(5);
+		ev.setInst(iMock);
+		ev.setElevatorCount(1);
+		ev.setFloorCount(5);
 		
-		assertEquals(true, ev.SwitchOn());
+		assertEquals(true, ev.switchOn());
 		
 	}
 	
@@ -48,12 +48,12 @@ class ElevatorControllerUnitTest {
 		try {
 			Mockito.when(iMock.getElevatorNum()).thenReturn(1);
 			Mockito.when(iMock.getFloorNum()).thenReturn(5);
-			ev.SetInst(iMock);
+			ev.setInst(iMock);
 		} catch (Exception e) {
 			fail("Exception thrown at AutoInitializationTest: "+ e.toString());			
 		}
 		
-		assertEquals(true, ev.SwitchOn());
+		assertEquals(true, ev.switchOn());
 		
 	}
 	
@@ -62,7 +62,7 @@ class ElevatorControllerUnitTest {
 		
 		ElevatorController ev = new ElevatorController(1,5,iMock);
 		
-		assertEquals(true, ev.SwitchOn());		
+		assertEquals(true, ev.switchOn());		
 	}
 
 	@Test
@@ -70,7 +70,7 @@ class ElevatorControllerUnitTest {
 		
 		ElevatorController ev = new ElevatorController();
 		
-		assertEquals(false,ev.SetInst(null));	
-		assertEquals(false,ev.SwitchOn());
+		assertEquals(false,ev.setInst(null));	
+		assertEquals(false,ev.switchOn());
 	}
 }

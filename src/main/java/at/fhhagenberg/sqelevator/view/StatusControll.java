@@ -75,7 +75,7 @@ public class StatusControll extends AnchorPane {
         eInfo
     }
 
-    public void AddStatus(StatusIdentifyer Identify, String Text){
+    public void addStatus(StatusIdentifyer Identify, String Text){
 
         switch (Identify)
         {

@@ -24,7 +24,7 @@ public class SystemData {
 	 * 
 	 * @return array of elevatordata
 	 */
-	public ElevatorData[] GetElevatorData() {
+	public ElevatorData[] getElevatorData() {
 		return this.elevators;
 	}
 
@@ -33,7 +33,7 @@ public class SystemData {
 	 * 
 	 * @return buildingdata
 	 */
-	public BuildingData GetBuildingButtonUpData() {
+	public BuildingData getBuildingButtonUpData() {
 		return this.buildingButtonUp;
 	}
 	
@@ -42,7 +42,7 @@ public class SystemData {
 	 * 
 	 * @return buildingdata
 	 */
-	public BuildingData GetBuildingButtonDownData() {
+	public BuildingData getBuildingButtonDownData() {
 		return this.buildingButtonDown;
 	}
 
@@ -51,7 +51,7 @@ public class SystemData {
 	 * 
 	 * @param cloned elevator data from system
 	 */
-	public void SetElevatorData(ElevatorData[] cloned) {
+	public void setElevatorData(ElevatorData[] cloned) {
 		this.elevators = cloned;
 	}
 
@@ -60,7 +60,7 @@ public class SystemData {
 	 * 
 	 * @param cloned updated building data from system
 	 */
-	public void SetBuildingButonUpData(BuildingData cloned) {
+	public void setBuildingButonUpData(BuildingData cloned) {
 		this.buildingButtonUp = cloned;
 	}
 	
@@ -69,7 +69,7 @@ public class SystemData {
 	 * 
 	 * @param cloned updated building data from system
 	 */
-	public void SetBuildingButonDownData(BuildingData cloned) {
+	public void setBuildingButonDownData(BuildingData cloned) {
 		this.buildingButtonDown = cloned;
 	}
 }

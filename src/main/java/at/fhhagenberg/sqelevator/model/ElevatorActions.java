@@ -18,10 +18,10 @@ public class ElevatorActions {
 	 * ctor with init of all members for Actions to be set onto the elevator on a cycle
 	 */
 	public ElevatorActions(int target, boolean commitedDirIsUp, boolean isAuto, boolean[] servicedFloors) {	
-		this.TargetFl=target;
-		this.CommitedDirIsUp =commitedDirIsUp;
-		this.AutoMode=isAuto;
-		this.ServicesFloors=servicedFloors;
+		this.targetFl=target;
+		this.commitedDirIsUp =commitedDirIsUp;
+		this.autoMode=isAuto;
+		this.servicesFloors=servicedFloors;
 	}
 	
 	/**
@@ -36,26 +36,26 @@ public class ElevatorActions {
 	 * Set the Targetfloor
 	 * Property to be set by gui-binding
 	 */
-	public int TargetFl;
+	public int targetFl;
 	
 	/**
 	 * Set the ComitedDir
 	 * Property to be set by gui-binding
 	 */
-	public boolean CommitedDirIsUp;
+	public boolean commitedDirIsUp;
 	
 	/**
 	 * Set Automode
 	 * Property to be set by gui-binding
 	 */
-	public boolean AutoMode;
+	public boolean autoMode;
 	
 	
 	/**
 	 * Set Servicefloors directly
 	 * Property to be set by gui-binding
 	 */
-	public boolean[] ServicesFloors;
+	public boolean[] servicesFloors;
 	
 	
 	

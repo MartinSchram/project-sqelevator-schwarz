@@ -29,11 +29,11 @@ public class ElevatorSchedulerTest {
 
 		try {
 			Mockito.when(iMock.getTarget(0)).thenReturn(1);
-			ElevatorScheduler.Schedule(e,
+			ElevatorScheduler.schedule(e,
 					ea.clone(),
 					new Building(2, iMock));
 					
-			assertEquals(1, e[0].GetData().GetTarget());
+			assertEquals(1, e[0].getData().getTarget());
 
 	        Mockito.verify(iMock).getTarget(0);
 	        
@@ -53,14 +53,14 @@ public class ElevatorSchedulerTest {
 			
 		try {
 			Mockito.when(iMock.getFloorButtonUp(0)).thenReturn(false);
-			b.Update();
-			b.StoreState();
+			b.update();
+			b.storeState();
 			
 			Mockito.when(iMock.getFloorButtonUp(0)).thenReturn(true);
 			Mockito.when(iMock.getTarget(0)).thenReturn(1);
-			ElevatorScheduler.Schedule(e,ea.clone(),b);		
+			ElevatorScheduler.schedule(e,ea.clone(),b);		
 			
-			assertEquals(1, e[0].GetData().GetTarget());
+			assertEquals(1, e[0].getData().getTarget());
 
 	        Mockito.verify(iMock).getTarget(0);
 	        
