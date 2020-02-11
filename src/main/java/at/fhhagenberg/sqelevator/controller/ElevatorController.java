@@ -42,9 +42,9 @@ public class ElevatorController extends Observable {
 
 	}
 
-	public ElevatorController(ElevatorUI uIController) {
-		this.addObserver(uIController);
-		uIController = uIController;
+	public ElevatorController(ElevatorUI uiController) {
+		this.addObserver(uiController);
+		uIController = uiController;
 	}
 
 	/**
