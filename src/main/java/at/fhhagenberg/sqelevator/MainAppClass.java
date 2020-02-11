@@ -64,14 +64,14 @@ public class MainAppClass extends Application {
 			m_UiController= myLoader.<ElevatorUI>getController();
 
 			// Elevator Controller
-			m_ElevatorConnectionController=new ElevatorController();
+			m_ElevatorConnectionController=new ElevatorController(m_UiController);
 			m_ElevatorConnectionController.ConnectRMI();
 			int FloorCount=  m_ElevatorConnectionController.BackEnd.getFloorNum();
 			int ElevatorCount= m_ElevatorConnectionController.BackEnd.getElevatorNum();
 
 			// setup Ui with the count of Elevator and Floor count
 			m_UiController.SetupUi(ElevatorCount,FloorCount);
-			m_ElevatorConnectionController.addObserver(m_UiController);
+//			m_ElevatorConnectionController.addObserver(m_UiController);
 			m_ElevatorConnectionController.SwitchOn();
 			PollingThread = new Thread(runnable);
 			PollingThread.start();

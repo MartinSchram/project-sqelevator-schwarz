@@ -6,6 +6,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.Observable;
 
+import at.fhhagenberg.sqelevator.view.ElevatorUI;
 import sqelevator.IElevator;
 import at.fhhagenberg.sqelevator.model.*;
 
@@ -22,7 +23,7 @@ public class ElevatorController extends Observable {
 	private Elevator[] elevators;
 	private Building building;
 	private ElevatorScheduler scheduler;
-
+	private ElevatorUI m_UIController;
 	private SystemData observerdata;
 
 	/**
@@ -40,6 +41,12 @@ public class ElevatorController extends Observable {
 	 */
 	public ElevatorController() {
 
+	}
+
+
+	public ElevatorController(ElevatorUI UIController) {
+		this.addObserver(UIController);
+		m_UIController=UIController;
 	}
 
 	/**
@@ -157,6 +164,10 @@ public class ElevatorController extends Observable {
 			this.observerdata = new SystemData(elevatorCount);
 
 			try {
+
+				for(int i=0;i<elevatorCount;i++){
+					this.GuiActions[i]=m_UIController.m_ElevatorVector.get(i).oneElevAction;
+				}
 
 				for (int i = 0; i < elevators.length; i++) {
 					elevators[i] = new Elevator(i, floors, this.BackEnd);

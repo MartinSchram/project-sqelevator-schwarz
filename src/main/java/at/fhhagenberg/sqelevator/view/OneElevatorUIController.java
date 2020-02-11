@@ -1,5 +1,8 @@
 package at.fhhagenberg.sqelevator.view;
 
+import at.fhhagenberg.sqelevator.model.Elevator;
+import at.fhhagenberg.sqelevator.model.ElevatorActions;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -75,7 +78,13 @@ public class OneElevatorUIController extends AnchorPane {
     private Image elevDirArrowUp;
     private Image elevDirArrowDown;
 
-    private ArrayList<ImageView> mlistStages = new ArrayList<ImageView>();
+//    private ArrayList<ImageView> mlistStages = new ArrayList<ImageView>();
+
+    private ObservableList<ToggleButton> m_StagesList=FXCollections.observableArrayList();
+    private ObservableList<ImageView> m_StagesStatusList=FXCollections.observableArrayList();
+    private int mCountStages=0;
+
+    public ElevatorActions oneElevAction;
 
     public OneElevatorUIController(int Stages, String ElevatorName) {
 
@@ -106,11 +115,18 @@ public class OneElevatorUIController extends AnchorPane {
         elevDirArrowUp = new Image(in);
 
         imgViewDoors.setImage(elevCloseDoorImg);
-        SetElevatorDirection(ElevatorDir.eDown);
+//        SetElevatorDirection(ElevatorDir.eDown);
 
-        SetOpCurrentOpMode(OperationModes.eAUTO);
+        tbtnStatusManual.setSelected(true);
+        SetOpCurrentOpMode(OperationModes.eMANUAL);
 
         InitilizeElevator(Stages, ElevatorName);
+
+        oneElevAction=new ElevatorActions();
+        oneElevAction.ServicesFloors=new boolean[mCountStages];
+        for(int i=0;i<mCountStages;i++){
+            oneElevAction.ServicesFloors[i]=true;
+        }
 
     }
 
@@ -124,18 +140,56 @@ public class OneElevatorUIController extends AnchorPane {
      */
     private void InitilizeElevator(int CountStages, String elevatorName) throws InvalidParameterException {
 
-        if (CountStages > 0 && elevatorName!="") {
-            CountStages = CountStages;
+        if (CountStages > 0 && elevatorName != "") {
+            mCountStages = CountStages;
             lblElevatorName.setText(elevatorName);
             for (int i = 0; i < CountStages; i++) {
-                StagesVBox.getChildren().add(new ImageView(elevStageEmpty));
+                HBox Temp=new HBox();
+
+                ToggleButton ToggleBtn=new ToggleButton();
+                ToggleBtn.setPrefWidth(50);
+                ToggleBtn.setText(Integer.toString(i+1));
+                ToggleBtn.setOnAction(StageButtonEventHandler);
+
+                ImageView img=new ImageView();
+                img.setImage(elevStageEmpty);
+                m_StagesList.add(ToggleBtn);
+                m_StagesStatusList.add(img);
+                Temp.getChildren().add(ToggleBtn);
+                Temp.getChildren().add(img);
+//                StagesVBox.getChildren().add(0,ToggleBtn);
+                StagesVBox.getChildren().add(0,Temp);
+
             }
+
         }
         else {
             throw new InvalidParameterException("Check Method Parameter");
         }
 
     }
+
+
+    // Creating the mouse event handler
+    EventHandler<ActionEvent> StageButtonEventHandler = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent e) {
+
+            ToggleButton selectedBTN = (ToggleButton) e.getTarget();
+            int numberStagePressed= Integer.parseInt(selectedBTN.getText());
+
+            for(int i=0;i<mCountStages;i++){
+                if((i+1)==numberStagePressed){
+                    m_StagesList.get(i).setSelected(true);
+                }
+                else{
+                    m_StagesList.get(i).setSelected(false);
+                }
+            }
+            oneElevAction.TargetFl=numberStagePressed-1;
+        }
+    };
+
 
     public enum OperationModes {
         eAUTO,
@@ -155,8 +209,42 @@ public class OneElevatorUIController extends AnchorPane {
 
     @FXML
     void onBtnPressedHandle(ActionEvent event) {
+
+        if(event.getTarget().equals(tbtnStatusAutomatic)){
+            if(!oneElevAction.AutoMode) {
+                oneElevAction.AutoMode = true;
+                tbtnStatusManual.setSelected(false);
+                SetOpCurrentOpMode(OperationModes.eAUTO);
+            }
+            else{
+                tbtnStatusAutomatic.setSelected(true);
+            }
+        }
+        else{
+            if(oneElevAction.AutoMode) {
+                oneElevAction.AutoMode = false;
+                tbtnStatusAutomatic.setSelected(false);
+                SetOpCurrentOpMode(OperationModes.eMANUAL);
+            }
+            else {
+                tbtnStatusManual.setSelected(true);
+            }
+        }
+
     }
 
+    public void SetElevatorCurrentState(int currState){
+
+        for(int i=0;i<mCountStages;i++){
+            if(i==currState){
+                m_StagesStatusList.get(i).setImage(elevStageFull);
+            }
+            else{
+                m_StagesStatusList.get(i).setImage(elevStageEmpty);
+            }
+        }
+
+    }
 
     /**
      * Sets the Elevator
@@ -237,13 +325,16 @@ public class OneElevatorUIController extends AnchorPane {
     }
 
 
+
     /**
      * Setting Velocity on Elevator Window
      *
      * @param VelocityToSet Sets the value of the
      */
     public void SetVelocity(int VelocityToSet) {
+
         lblVelocity.setText(Integer.toString(VelocityToSet));
+
     }
 
 

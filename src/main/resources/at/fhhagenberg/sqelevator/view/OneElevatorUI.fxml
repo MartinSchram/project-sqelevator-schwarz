@@ -24,7 +24,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
                   </ToggleButton>
-                  <ToggleButton fx:id="tbtnStatusManual" mnemonicParsing="false" prefHeight="25.0" prefWidth="130.0" stylesheets="@../Styles/ButtonStyles.css" text="Manual" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <ToggleButton fx:id="tbtnStatusManual" mnemonicParsing="false" onAction="#onBtnPressedHandle" prefHeight="25.0" prefWidth="130.0" stylesheets="@../Styles/ButtonStyles.css" text="Manual" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </GridPane.margin>
