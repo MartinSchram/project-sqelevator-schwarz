@@ -34,6 +34,7 @@ import java.util.ResourceBundle;
 
 
 /**
+ * @author Onur Polat Ui controller for one Elevator
  *
  */
 public class OneElevatorUIController extends AnchorPane {
@@ -78,7 +79,6 @@ public class OneElevatorUIController extends AnchorPane {
     private Image elevDirArrowUp;
     private Image elevDirArrowDown;
 
-//    private ArrayList<ImageView> mlistStages = new ArrayList<ImageView>();
 
     private ObservableList<ToggleButton> m_StagesList=FXCollections.observableArrayList();
     private ObservableList<ImageView> m_StagesStatusList=FXCollections.observableArrayList();
@@ -86,6 +86,11 @@ public class OneElevatorUIController extends AnchorPane {
 
     public ElevatorActions oneElevAction;
 
+    /**
+     * Constructor for one Elevator
+     * @param Stages
+     * @param ElevatorName
+     */
     public OneElevatorUIController(int Stages, String ElevatorName) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("OneElevatorUI.fxml"));
@@ -115,7 +120,6 @@ public class OneElevatorUIController extends AnchorPane {
         elevDirArrowUp = new Image(in);
 
         imgViewDoors.setImage(elevCloseDoorImg);
-//        SetElevatorDirection(ElevatorDir.eDown);
 
         tbtnStatusManual.setSelected(true);
         SetOpCurrentOpMode(OperationModes.eMANUAL);
@@ -129,7 +133,6 @@ public class OneElevatorUIController extends AnchorPane {
         }
 
     }
-
 
     /**
      * Sets the Stages on the Elevator
@@ -157,7 +160,6 @@ public class OneElevatorUIController extends AnchorPane {
                 m_StagesStatusList.add(img);
                 Temp.getChildren().add(ToggleBtn);
                 Temp.getChildren().add(img);
-//                StagesVBox.getChildren().add(0,ToggleBtn);
                 StagesVBox.getChildren().add(0,Temp);
 
             }
@@ -233,15 +235,24 @@ public class OneElevatorUIController extends AnchorPane {
 
     }
 
-    public void SetElevatorCurrentState(int currState){
+    /**
+     * Sets the Current state of the elevator on the UI
+     * @param currState Current Stage of the Elevator To Set
+     * @throws InvalidParameterException Elevator Current Stage
+     */
+    public void SetElevatorCurrentState(int currState) throws InvalidParameterException {
 
-        for(int i=0;i<mCountStages;i++){
-            if(i==currState){
-                m_StagesStatusList.get(i).setImage(elevStageFull);
+        if(currState>=0 && currState< mCountStages) {
+            for (int i = 0; i < mCountStages; i++) {
+                if (i == currState) {
+                    m_StagesStatusList.get(i).setImage(elevStageFull);
+                } else {
+                    m_StagesStatusList.get(i).setImage(elevStageEmpty);
+                }
             }
-            else{
-                m_StagesStatusList.get(i).setImage(elevStageEmpty);
-            }
+        }
+        else{
+            throw new InvalidParameterException("Elevator Current Stage Invalid Parameter");
         }
 
     }
@@ -294,6 +305,7 @@ public class OneElevatorUIController extends AnchorPane {
      */
     public void SetDoorState(DoorsState StateToSet) throws InvalidParameterException {
 
+
         switch (StateToSet) {
             case eClosen:
                 imgViewDoors.setImage(elevOpenDoorImg);
@@ -308,7 +320,7 @@ public class OneElevatorUIController extends AnchorPane {
     }
 
     /**
-     * Setting Payload
+     * Setting Payload on view
      *
      * @param PayLoadToSet Value of the Payload for showing
      * @throws InvalidParameterException PayLoadToSet is invalid when value is <0
@@ -319,7 +331,7 @@ public class OneElevatorUIController extends AnchorPane {
             lblPayload.setText(Integer.toString(PayLoadToSet));
         }
         else {
-            throw new InvalidParameterException("Elevator name cannot be an empty String ");
+            throw new InvalidParameterException("Payload is not Valid ");
         }
 
     }

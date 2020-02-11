@@ -17,6 +17,10 @@ import java.io.InputStream;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
+/**
+ * @author Onur Polat Ui controller for the CallsUI
+ *
+ */
 public class CallsControll extends AnchorPane {
 
     @FXML
@@ -28,6 +32,10 @@ public class CallsControll extends AnchorPane {
     private int m_CountStages=0;
 
 
+    /**
+     * Constructor
+     * @param CountStages Amount of Stages in the Building
+     */
     public CallsControll(int CountStages) {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CallsControll.fxml"));
@@ -42,9 +50,6 @@ public class CallsControll extends AnchorPane {
 
         m_CountStages=CountStages;
         CreateStages(CountStages);
-
-//        SetStageDownActive(2);
-//        SetStageUpActive(9);
 
     }
 
