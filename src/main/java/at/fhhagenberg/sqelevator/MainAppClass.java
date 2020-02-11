@@ -2,10 +2,10 @@ package at.fhhagenberg.sqelevator;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.rmi.Naming;
+
 
 import at.fhhagenberg.sqelevator.controller.ElevatorController;
-import at.fhhagenberg.sqelevator.model.Elevator;
+
 import at.fhhagenberg.sqelevator.view.ElevatorUI;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +17,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
-import sqelevator.IElevator;
+
 
 public class MainAppClass extends Application {
 
@@ -44,7 +44,6 @@ public class MainAppClass extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
-		// TODO Auto-generated method stub
 		try {
 
 			// initializing Ui
@@ -61,12 +60,10 @@ public class MainAppClass extends Application {
 
 			// setup Ui with the count of Elevator and Floor count
 			m_UiController.SetupUi(ElevatorCount,FloorCount);
-//			m_ElevatorConnectionController.addObserver(m_UiController);
 			m_ElevatorConnectionController.SwitchOn();
 			PollingThread = new Thread(runnable);
 			PollingThread.start();
-//			m_ElevatorConnectionController.RunCyclic();
-//			m_UiController.SetPayload(0,100);
+
 
 			stage.setTitle("ControllerUI");
 			stage.setScene(new Scene(myPane, myPane.getWidth(), myPane.getHeight()));

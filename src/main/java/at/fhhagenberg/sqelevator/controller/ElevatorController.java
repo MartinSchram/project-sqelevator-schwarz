@@ -188,16 +188,26 @@ public class ElevatorController extends Observable {
 
 	}
 
+	/**
+	 *  executes one cycle until switched off
+	 */
 	public void RunCyclic() {
 		while (this.on) {
 			try {
 				RunCycle();
-			} catch (RemoteException | CloneNotSupportedException | InterruptedException e) {
+			} catch (Exception e) {
 				this.SwitchOff();
 			}
 		}
 	}
 
+	
+	/**
+	 * runs one cycle of the elevator control logic
+	 * @throws RemoteException
+	 * @throws CloneNotSupportedException
+	 * @throws InterruptedException
+	 */
 	public void RunCycle() throws RemoteException, CloneNotSupportedException, InterruptedException {
 		if (this.on) {
 			for (Elevator e : elevators)
